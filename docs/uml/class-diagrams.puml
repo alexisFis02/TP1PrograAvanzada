@@ -1,0 +1,96 @@
+@startuml
+class Unidad implements Atacable {
+    - salud : int
+    - saludMaxima : int
+    - dañoBase : int
+    - rangoAtaqueMin : int
+    - rangoAtaqueMax : int
+    + atacar(objetivo: Unidad) : void
+    + recibirAtaque(daño: int) : void
+    + descansar() : void
+}
+
+class Wrives extends Unidad {
+    - haSidoAtacado : boolean
+    - contadorAtaques : int
+    + meditar() : void
+}
+
+class Reralopes extends Unidad {
+    - erroresConsecutivos : int
+    - ataquesPotenciados : int
+    + concentrarse() : void
+}
+
+class Radaiteran extends Unidad {
+    - contadorAtaques : int
+}
+
+class Nortaichian extends Unidad {
+    - enfurecido : boolean
+    - turnosEnfurecido : int
+    - turnosPiedra : int
+    + volverseDePiedra() : void
+}
+
+interface Atacable {
+    - tipo : String // ENUM propio, aliado, enemigo
+    + recibirAtaque(daño: int) : void
+}
+
+ class Ejercito implements Atacable {
+    - unidades : PriorityQueue<Atacable>
+    + atacar(ejercitoEnemigo : Ejercito) : void
+    + recibirAtaque(daño : int) : void
+    + descansar() : void
+}
+
+class Batalla {
+    - aliado: Atacable
+    - enemigo: Atacable
+    + simularBatalla() : boolean
+}
+
+class Poblado {
+    - id : int
+    - habitantes : int
+    - raza : String // ENUM
+    - tipo : String // ENUM propio, aliado, enemigo
+}
+
+class Mapa {
+    - instancia : Mapa
+    - poblados : List<Poblado>
+    - caminos : Map<Poblado, List<Camino>>
+    + getInstancia() : Mapa
+    + caminoMasCorto(origen : Poblado, destino : Poblado) : List<Poblado>
+}
+
+class Camino {
+    - origen : Poblado
+    - destino : Poblado
+    - distancia : int
+}
+
+class Mision {
+    - mapa : Mapa
+    - ejercito : Atacable
+    - destino : Poblado
+    + esMisionFactible() : boolean
+    + calcularGuerrerosFinales() : int
+    + calcularTiempoTotal() : int
+}
+
+Batalla *-- Atacable
+
+Mapa o-- Poblado
+Mapa o-- Camino
+Ejercito o-- Atacable
+
+Camino *-- Poblado
+
+Mision *-- Mapa
+Mision *-- Atacable
+Mision *-- Poblado
+
+@enduml
