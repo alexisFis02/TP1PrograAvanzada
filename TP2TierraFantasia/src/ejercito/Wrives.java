@@ -12,9 +12,9 @@ public class Wrives extends Unidad{
 	private boolean haSidoAtacado = false;
     private int contadorAtaques = 0;
 
-    public Wrives() {
+    public Wrives(Bando bando) {
         // TODO: pasar a constantes
-        super(108,108,113,14,28);
+        super(108,108,113,14,28, bando, Estado.SANO);
     }
 
     @Override
@@ -34,6 +34,7 @@ public class Wrives extends Unidad{
     
     @Override
     public String toString() {
-    	return "Wrives";
+    	return "[ Raza: Wrives, Bando: " + this.bando  + 
+    			" Estado: " + this.estado  + " ]";
     }
 }

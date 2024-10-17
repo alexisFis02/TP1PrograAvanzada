@@ -13,8 +13,8 @@ public class Nortaichan extends Unidad{
     private int contadorAtaques = 0;
     private int contadorDescansos = 0;
 
-    public Nortaichan() {
-        super(66, 66, 18, 16, 22);
+    public Nortaichan(Bando bando) {
+        super(66, 66, 18, 16, 22, bando, Estado.SANO);
     }
 
     @Override
@@ -34,6 +34,7 @@ public class Nortaichan extends Unidad{
     
     @Override
     public String toString() {
-    	return "Nortaichan";
+    	return "[ Raza: Nortaichan, Bando: " + this.bando  + 
+    			" Estado: " + this.estado  + " ]";
     }
 }

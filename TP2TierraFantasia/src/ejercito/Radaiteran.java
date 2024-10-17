@@ -9,8 +9,8 @@ package ejercito;
 public class Radaiteran extends Unidad{
 	private int contadorAtaques = 0;
 
-    public Radaiteran() {
-        super(53, 53, 27, 5, 46);
+    public Radaiteran(Bando bando) {
+        super(53, 53, 27, 5, 46, bando, Estado.SANO);
     }
 
     @Override
@@ -25,6 +25,7 @@ public class Radaiteran extends Unidad{
     
     @Override
     public String toString() {
-    	return "Radaiteran";
+    	return "[ Raza: Radaiteran, Bando: " + this.bando  + 
+    			" Estado: " + this.estado  + " ]";
     }
 }

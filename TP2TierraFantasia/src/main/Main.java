@@ -1,8 +1,11 @@
 package main;
 
 import ejercito.Bando;
-import ejercito.Nortaichan;
+import ejercito.Ejercito;
+import ejercito.Estado;
+import ejercito.RazaNativa;
 import ejercito.Reralopes;
+import ejercito.Unidad;
 import ejercito.Wrives;
 import mapa.Mapa;
 import mapa.Poblado;
@@ -20,10 +23,10 @@ public class Main {
 		
 		Mapa mapaFantacia = Mapa.instanciar(mapa);
 		
-		Poblado poblado1 = new Poblado(0, 100, new Wrives(), Bando.PROPIO);
-		Poblado poblado2 = new Poblado(1, 30, new Reralopes(), Bando.ALIADO);
-		Poblado poblado3 = new Poblado(2, 40, new Nortaichan(), Bando.ENEMIGO);
-		Poblado poblado4 = new Poblado(3, 60, new Nortaichan(), Bando.ENEMIGO);
+		Poblado poblado1 = new Poblado(0, 100, RazaNativa.WRIVES, Bando.PROPIO);
+		Poblado poblado2 = new Poblado(1, 30, RazaNativa.RERALOPES, Bando.ALIADO);
+		Poblado poblado3 = new Poblado(2, 40, RazaNativa.NORTAICHAN, Bando.ENEMIGO);
+		Poblado poblado4 = new Poblado(3, 60, RazaNativa.NORTAICHAN, Bando.ENEMIGO);
 		Poblado[] poblados = {poblado1, poblado2, poblado3, poblado4};
 		
 		Poblado pobladoInicial = poblado1;
@@ -38,6 +41,24 @@ public class Main {
 		
 		mision.mostrarRuta();
 		
+		Ejercito ejercito = new Ejercito(20);
+		for(int i = 0; i < 5; i++) {
+			ejercito.agregarUnidad(new Wrives(Bando.PROPIO));
+		}
+		
+		for(int i = 0; i < 4; i++) {
+			ejercito.agregarUnidad(new Reralopes(Bando.ALIADO));
+		}
+		
+		for(int i = 0; i < 3; i++) {
+			Unidad unidad = new Reralopes(Bando.ALIADO);
+			unidad.ModificarEstado(Estado.HERIDO);
+			ejercito.agregarUnidad(unidad);
+		}
+		
+		
+		System.out.println("Formacion Ejecito: ");
+		ejercito.mostrarEjecito();
 		
 	     ///System.out.println(mision);
 	}

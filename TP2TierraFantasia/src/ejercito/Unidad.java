@@ -6,15 +6,18 @@ public abstract class Unidad implements Atacable{
     protected int danioBase;
     protected int rangoAtaqueMin;
     protected int rangoAtaqueMax;
-    protected OrdenDePrioridad condicionUnidad;
+    protected Estado estado;
+    protected Bando bando;
 
     public Unidad (int salud, int saludMaxima, int danioBase, int rangoAtaqueMin, 
-    			int rangoAtaqueMax) {
+    			int rangoAtaqueMax, Bando bando, Estado estado) {
         this.salud = salud;
         this.saludMaxima = saludMaxima;
         this.danioBase = danioBase;
         this.rangoAtaqueMin = rangoAtaqueMin;
         this.rangoAtaqueMax = rangoAtaqueMax;
+        this.bando = bando;
+        this.estado = estado;
     }
 
     public abstract void atacar(Unidad enemigo);
@@ -31,12 +34,15 @@ public abstract class Unidad implements Atacable{
         return salud > 0;
     }
     
-    public void setCondicionUnidad(OrdenDePrioridad condicion) {
-    	this.condicionUnidad = condicion;
+    public void ModificarEstado(Estado estado) {
+    	this.estado = estado;
     }
     
-    public OrdenDePrioridad getCondicionUnidad() {
-    	return this.condicionUnidad;
+    public Estado verEstado() {
+    	return this.estado;
     }
     
+    public Bando verBando() {
+    	return this.bando;
+    }
 }

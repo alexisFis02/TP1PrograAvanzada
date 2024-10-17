@@ -1,15 +1,15 @@
 package mapa;
 
 import ejercito.Bando;
-import ejercito.Unidad;
+import ejercito.RazaNativa;
 
 public class Poblado {
 	private int poblado;
 	private int cantHabitantes;
-	private Unidad raza;
+	private RazaNativa raza;
 	private Bando bando;
 	
-	public Poblado(int nroPoblado,  int cantHabitantes, Unidad raza, Bando bando) {
+	public Poblado(int nroPoblado,  int cantHabitantes, RazaNativa raza, Bando bando) {
 		this.poblado = nroPoblado;
 		this.cantHabitantes = cantHabitantes;
 		this.raza = raza;
@@ -24,7 +24,7 @@ public class Poblado {
 		return this.cantHabitantes;
 	}
 	
-	public Unidad devolverRazaNativas() {
+	public RazaNativa devolverRazaNativas() {
 		return this.raza;
 	}
 	

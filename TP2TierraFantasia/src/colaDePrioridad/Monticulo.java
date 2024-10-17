@@ -1,14 +1,13 @@
 package colaDePrioridad;
 
+import ejercito.Unidad;
 
-public class Monticulo<T> {
-	private T[] monticulo;
-	private Comparador<T> comparador;
+public class Monticulo {
+	private Unidad[] monticulo;
 	private int tam;
 	
-public Monticulo(int tamMonticulo, Comparador<T> comparador) {
-	this.monticulo = (T[]) new Object[tamMonticulo];
-	this.comparador = comparador;
+public Monticulo(int tamMonticulo) {
+	this.monticulo = new Unidad[tamMonticulo];
 	this.tam = 0;
 }
 
@@ -17,13 +16,22 @@ public Monticulo(int tamMonticulo, Comparador<T> comparador) {
 
 
 
-public void agregarElementoMonticulo(T elem) {
+public void agregarElementoMonticulo(Unidad elem) {
 	int padre = (this.tam + 1) / 2;
 	int hijo = this.tam + 1;
-	this.monticulo[hijo] = elem;
 	
-	while(padre > 0 && this.comparador.comparar(elem, this.monticulo[padre]) < 0) {
-		T aux = this.monticulo[padre];
+	int tamMonticulo = this.monticulo.length;
+	
+	if(hijo < tamMonticulo) {
+		this.monticulo[hijo] = elem;
+	}
+	
+	
+	
+	
+	while(padre > 0 && padre < this.monticulo.length && 
+			ComparadorUnidad.comparar(elem, this.monticulo[padre]) < 0) {
+		Unidad aux = this.monticulo[padre];
 		this.monticulo[padre] = elem;
 		this.monticulo[hijo] = aux;
 		
@@ -40,12 +48,12 @@ public void agregarElementoMonticulo(T elem) {
 
 
 
-public T removerElementoMonticulo() {
+public Unidad removerElementoMonticulo() {
 	if(this.tam == 0) {
 		throw new RuntimeException("El monticulo esta vacio");
 	}
 	
-	T primero = this.monticulo[1];
+	Unidad primero = this.monticulo[1];
 	this.monticulo[1] = this.monticulo[this.tam];
 	this.tam--;
 	int alturaMonticulo = (int) Math.floor(Math.log(tam) / Math.log(2));
@@ -53,15 +61,15 @@ public T removerElementoMonticulo() {
 	int padre = 1;
 	
 	while(alturaMonticulo - 1 > 0) {
-		if(this.comparador.comparar(this.monticulo[padre * 2], this.monticulo[(padre * 2) + 1]) < 0){
-			T aux = this.monticulo[padre];
+		if(ComparadorUnidad.comparar(this.monticulo[padre * 2], this.monticulo[(padre * 2) + 1]) < 0){
+			Unidad aux = this.monticulo[padre];
 			this.monticulo[padre] = this.monticulo[padre * 2];
 			this.monticulo[padre * 2] = aux;
 			
 			padre = padre * 2;
 		}
 		else {
-			T aux = this.monticulo[padre];
+			Unidad aux = this.monticulo[padre];
 			this.monticulo[padre] = this.monticulo[(padre * 2) + 1];
 			this.monticulo[(padre * 2) + 1] = aux;
 			
@@ -74,22 +82,22 @@ public T removerElementoMonticulo() {
 	
 	if(this.tam > padre) {
 		if(this.tam < ((padre * 2) + 1)  && 
-				this.comparador.comparar(this.monticulo[padre], this.monticulo[padre * 2]) < 0) {
-				T aux = this.monticulo[padre];
+				ComparadorUnidad.comparar(this.monticulo[padre], this.monticulo[padre * 2]) < 0) {
+				Unidad aux = this.monticulo[padre];
 				this.monticulo[padre] = this.monticulo[padre * 2];
 				this.monticulo[padre * 2] = aux;
 		}
 		else {
 			int hijo;
-			if(this.comparador.comparar(this.monticulo[padre * 2], this.monticulo[(padre * 2) + 1]) < 0) {
+			if(ComparadorUnidad.comparar(this.monticulo[padre * 2], this.monticulo[(padre * 2) + 1]) < 0) {
 				hijo = padre + 2; 
 			}
 			else {
 				hijo = (padre * 2) + 1;
 			}
 			
-			if(this.comparador.comparar(this.monticulo[hijo], this.monticulo[padre]) < 0) {
-				T aux = this.monticulo[padre];
+			if(ComparadorUnidad.comparar(this.monticulo[hijo], this.monticulo[padre]) < 0) {
+				Unidad aux = this.monticulo[padre];
 				this.monticulo[padre] = this.monticulo[hijo];
 				this.monticulo[hijo] = aux;
 				}
@@ -101,14 +109,16 @@ public T removerElementoMonticulo() {
 }
 
 
-
+public boolean monticuloVacio() {
+	return this.tam == 0? true : false;
+}
 
 
 
 
 public void mostrarMonticulo() {
-	for(int i = 1; i <= this.tam; i++) {
-		System.out.print(this.monticulo[i] + " ");
+	for(int i = 1; i <= this.tam && i < this.monticulo.length; i++) {
+		System.out.println(this.monticulo[i] + " ");
 	}
 }
 

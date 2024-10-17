@@ -11,8 +11,8 @@ public class Reralopes extends Unidad{
 	private int erroresConsecutivos = 0;
     private int ataquesConsecutivos = 0;
 
-    public Reralopes() {
-        super(53, 53, 27, 5, 46);
+    public Reralopes(Bando bando) {
+        super(53, 53, 27, 5, 46, bando, Estado.SANO);
     }
 
     @Override
@@ -27,6 +27,7 @@ public class Reralopes extends Unidad{
     
     @Override
     public String toString() {
-    	return "Reralopes";
+    	return "[ Raza: Reralopes, Bando: " + this.bando  + 
+    			" Estado: " + this.estado  + " ]";
     }
 }
