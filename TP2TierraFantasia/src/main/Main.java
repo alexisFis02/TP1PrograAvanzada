@@ -46,7 +46,7 @@ public class Main {
 			ejercito.agregarUnidad(new Wrives(Bando.PROPIO));
 		}
 		
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 5; i++) {
 			ejercito.agregarUnidad(new Reralopes(Bando.ALIADO));
 		}
 		
@@ -58,7 +58,10 @@ public class Main {
 		
 		
 		System.out.println("Formacion Ejecito: ");
-		ejercito.mostrarEjecito();
+		while(!ejercito.tieneUnidadesVivas()) {
+			Unidad unidad = ejercito.devolverUnidad();
+			System.out.println(unidad);
+		}
 		
 	     ///System.out.println(mision);
 	}

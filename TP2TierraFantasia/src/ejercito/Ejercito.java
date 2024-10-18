@@ -16,7 +16,7 @@ public class Ejercito implements Atacable{
     
     
     public Unidad devolverUnidad() {
-    	Unidad unidad = (Unidad)this.unidades.removerElementoMonticulo();
+    	Unidad unidad = this.unidades.removerElementoMonticulo();
     	
     	return unidad;
     }

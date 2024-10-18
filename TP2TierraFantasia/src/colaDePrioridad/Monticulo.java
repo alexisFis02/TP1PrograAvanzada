@@ -19,17 +19,12 @@ public Monticulo(int tamMonticulo) {
 public void agregarElementoMonticulo(Unidad elem) {
 	int padre = (this.tam + 1) / 2;
 	int hijo = this.tam + 1;
-	
-	int tamMonticulo = this.monticulo.length;
-	
-	if(hijo < tamMonticulo) {
+		
+	if(hijo < this.monticulo.length) {
 		this.monticulo[hijo] = elem;
 	}
 	
-	
-	
-	
-	while(padre > 0 && padre < this.monticulo.length && 
+	while(padre > 0 && hijo < this.monticulo.length && 
 			ComparadorUnidad.comparar(elem, this.monticulo[padre]) < 0) {
 		Unidad aux = this.monticulo[padre];
 		this.monticulo[padre] = elem;
@@ -59,52 +54,40 @@ public Unidad removerElementoMonticulo() {
 	int alturaMonticulo = (int) Math.floor(Math.log(tam) / Math.log(2));
 	
 	int padre = 1;
+	int hijo;
 	
-	while(alturaMonticulo - 1 > 0) {
-		if(ComparadorUnidad.comparar(this.monticulo[padre * 2], this.monticulo[(padre * 2) + 1]) < 0){
-			Unidad aux = this.monticulo[padre];
-			this.monticulo[padre] = this.monticulo[padre * 2];
-			this.monticulo[padre * 2] = aux;
-			
-			padre = padre * 2;
-		}
-		else {
-			Unidad aux = this.monticulo[padre];
-			this.monticulo[padre] = this.monticulo[(padre * 2) + 1];
-			this.monticulo[(padre * 2) + 1] = aux;
-			
-			padre = (padre * 2) + 1;
-		}
-		
-		alturaMonticulo--;
-	}
-	
-	
-	if(this.tam > padre) {
-		if(this.tam < ((padre * 2) + 1)  && 
-				ComparadorUnidad.comparar(this.monticulo[padre], this.monticulo[padre * 2]) < 0) {
-				Unidad aux = this.monticulo[padre];
-				this.monticulo[padre] = this.monticulo[padre * 2];
-				this.monticulo[padre * 2] = aux;
-		}
-		else {
-			int hijo;
-			if(ComparadorUnidad.comparar(this.monticulo[padre * 2], this.monticulo[(padre * 2) + 1]) < 0) {
-				hijo = padre + 2; 
+	while(alturaMonticulo > 0) {
+		if(this.tam >= padre * 2 + 1) {
+			if(ComparadorUnidad.comparar(this.monticulo[padre * 2], this.monticulo[(padre * 2) + 1]) < 0){
+				hijo = padre * 2;
 			}
 			else {
-				hijo = (padre * 2) + 1;
+				hijo = padre * 2 + 1;
 			}
 			
-			if(ComparadorUnidad.comparar(this.monticulo[hijo], this.monticulo[padre]) < 0) {
+			if(ComparadorUnidad.comparar(this.monticulo[hijo], this.monticulo[padre]) < 0){
 				Unidad aux = this.monticulo[padre];
 				this.monticulo[padre] = this.monticulo[hijo];
 				this.monticulo[hijo] = aux;
-				}
+				
+				padre = hijo;
 			}
 		}
-	
-	
+		
+		if(this.tam == padre * 2) {
+			if(ComparadorUnidad.comparar(this.monticulo[padre * 2], this.monticulo[padre]) < 0){
+				Unidad aux = this.monticulo[padre];
+				this.monticulo[padre] = this.monticulo[padre * 2];
+				this.monticulo[padre * 2] = aux;
+				
+				padre = padre * 2;
+			}	
+		}
+		
+		
+		alturaMonticulo--;
+	}
+
 		return primero;
 }
 
