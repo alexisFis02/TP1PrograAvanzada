@@ -4,8 +4,9 @@ import ejercito.Bando;
 import ejercito.Estado;
 import ejercito.Unidad;
 
-public class ComparadorUnidad{
-	 public static int comparar(Unidad unidad1, Unidad unidad2) {
+public class ComparadorUnidad implements Comparador<Unidad>{
+	@Override
+	 public int comparar(Unidad unidad1, Unidad unidad2) {
 		if(unidad1.verBando() == Bando.ALIADO && unidad2.verBando() == Bando.PROPIO) {
 			return -1;
 		}

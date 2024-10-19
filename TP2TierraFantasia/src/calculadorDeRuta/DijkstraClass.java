@@ -27,12 +27,15 @@ public class DijkstraClass {
 		for(int i = 0; i < (this.vecCostoMinimo.length - 2); i++) {
 			nodosVisitados[nodoAAnalizar] = true;
 			for(int j = 0; j < this.vecCostoMinimo.length; j++) {
+				
+				int costoIntermedio = this.vecCostoMinimo[nodoAAnalizar] == Integer.MAX_VALUE
+						          	|| this.matrizDeAdyacencias[nodoAAnalizar][j] == Integer.MAX_VALUE? Integer.MAX_VALUE : this.vecCostoMinimo[nodoAAnalizar] + 
+											this.matrizDeAdyacencias[nodoAAnalizar][j];
+				
 				if(nodosVisitados[j] == false && 
-						this.vecCostoMinimo[j] > this.vecCostoMinimo[nodoAAnalizar] + 
-						this.matrizDeAdyacencias[nodoAAnalizar][j]) {
+						this.vecCostoMinimo[j] > costoIntermedio) {
 					
-					this.vecCostoMinimo[j] = this.vecCostoMinimo[nodoAAnalizar] + 
-							this.matrizDeAdyacencias[nodoAAnalizar][j];
+					this.vecCostoMinimo[j] = costoIntermedio;
 					this.vecPrededcesores[j] = nodoAAnalizar;
 				}
 			}

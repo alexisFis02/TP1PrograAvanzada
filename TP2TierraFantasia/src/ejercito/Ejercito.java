@@ -1,24 +1,26 @@
 package ejercito;
 
-import colaDePrioridad.Monticulo;
+import colaDePrioridad.ColaDePrioridad;
+import colaDePrioridad.Comparador;
 
 public class Ejercito implements Atacable{
-	private Monticulo unidades;
+	private ColaDePrioridad ejercitoActual;
 	private int tamEjercito;
 	
-    public Ejercito(int tam) {
-        this.unidades = new Monticulo(tam);
+	@SuppressWarnings("rawtypes")
+	public Ejercito(int tamColaPri, Comparador comp) {
+		this.ejercitoActual = new ColaDePrioridad(tamColaPri, comp);
+        this.tamEjercito = 0;
     }
 
-    public void agregarUnidad(Unidad unidad) {
-    	this.unidades.agregarElementoMonticulo(unidad);
+	public void agregarUnidad(Unidad unidad) {
+    	this.ejercitoActual.agregarACola(unidad);
+    	this.tamEjercito++;
     }
     
     
     public Unidad devolverUnidad() {
-    	Unidad unidad = this.unidades.removerElementoMonticulo();
-    	
-    	return unidad;
+    	return this.ejercitoActual.sacarDeCola();
     }
 
 
@@ -28,7 +30,7 @@ public class Ejercito implements Atacable{
     }
 
     public boolean tieneUnidadesVivas() {
-        return this.unidades.monticuloVacio();
+        return this.ejercitoActual.colaVacia();
     }
 
     public void descansar() {
@@ -40,6 +42,10 @@ public class Ejercito implements Atacable{
     }
     
     public void mostrarEjecito() {
-    	this.unidades.mostrarMonticulo();
+    	this.ejercitoActual.mostrarColaPrioridad();
+    }
+    
+    public int mostrarCantidadEjercito() {
+    	return this.tamEjercito;
     }
 }

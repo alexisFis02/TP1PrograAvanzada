@@ -1,5 +1,7 @@
 package main;
 
+import colaDePrioridad.Comparador;
+import colaDePrioridad.ComparadorUnidad;
 import ejercito.Bando;
 import ejercito.Ejercito;
 import ejercito.Estado;
@@ -13,12 +15,13 @@ import mision.Mision;
 
 public class Main {
 
+	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) {
 		int[][] mapa = {
-				{1000000,10,20,1000000},
-				{1000000,1000000,5,1000000},
-				{1000000,1000000,1000000,7},
-				{1000000,1000000,1000000,1000000}
+				{Integer.MAX_VALUE,10,20,Integer.MAX_VALUE},
+				{Integer.MAX_VALUE,Integer.MAX_VALUE,5,Integer.MAX_VALUE},
+				{Integer.MAX_VALUE,Integer.MAX_VALUE,Integer.MAX_VALUE,7},
+				{Integer.MAX_VALUE,Integer.MAX_VALUE,Integer.MAX_VALUE,Integer.MAX_VALUE}
 					 };
 		
 		Mapa mapaFantacia = Mapa.instanciar(mapa);
@@ -41,7 +44,9 @@ public class Main {
 		
 		mision.mostrarRuta();
 		
-		Ejercito ejercito = new Ejercito(20);
+		Comparador alineacionEjercito = new ComparadorUnidad();
+		
+		Ejercito ejercito = new Ejercito(20, alineacionEjercito);
 		for(int i = 0; i < 5; i++) {
 			ejercito.agregarUnidad(new Wrives(Bando.PROPIO));
 		}
@@ -50,7 +55,7 @@ public class Main {
 			ejercito.agregarUnidad(new Reralopes(Bando.ALIADO));
 		}
 		
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < 4; i++) {
 			Unidad unidad = new Reralopes(Bando.ALIADO);
 			unidad.ModificarEstado(Estado.HERIDO);
 			ejercito.agregarUnidad(unidad);
