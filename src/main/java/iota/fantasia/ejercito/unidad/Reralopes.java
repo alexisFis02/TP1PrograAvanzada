@@ -7,8 +7,9 @@ package iota.fantasia.ejercito.unidad;
 * Cuando descansa, se concentra y sus próximos 3 ataques (de esa unidad) dañan el doble del valor correspondiente.
 * */
 public class Reralopes extends Unidad{
-    private int erroresConsecutivos = 0;
-    private int ataquesConsecutivos = 0;
+    private int contadorAtaques = 0;
+    private int ataquesPotenciados = 0;
+    private boolean concentrado = false;
 
     public Reralopes() {
         super(53, 53, 27, 5, 46);
@@ -16,11 +17,37 @@ public class Reralopes extends Unidad{
 
     @Override
     public void atacar(Unidad enemigo) {
-        // TODO: completar metodo
+        if (!estaVivo() || !enemigo.estaVivo()) {
+            return;
+        }
+
+        contadorAtaques++;
+        
+        // Erra 2 de cada 4 ataques
+        if (contadorAtaques % 4 == 2 || contadorAtaques % 4 == 3) {
+            return;
+        }
+
+        int danioTotal = danioBase;
+        if (concentrado && ataquesPotenciados > 0) {
+            danioTotal *= 2;
+            ataquesPotenciados--;
+        }
+
+        enemigo.recibirAtaque(danioTotal);
     }
 
     @Override
     public void descansar() {
-        // TODO: completar metodo
+        concentrado = true;
+        ataquesPotenciados = 3;
+    }
+
+    @Override
+    public void recibirAtaque(int danio) {
+        super.recibirAtaque(danio);
+        // Se desconcentra al recibir daño
+        concentrado = false;
+        ataquesPotenciados = 0;
     }
 }

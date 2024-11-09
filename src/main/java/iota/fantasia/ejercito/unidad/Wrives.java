@@ -18,16 +18,29 @@ public class Wrives extends Unidad{
 
     @Override
     public void atacar(Unidad enemigo) {
-        // TODO: completar metodo
+        if (!estaVivo() || !enemigo.estaVivo() || !haSidoAtacado) {
+            return;
+        }
+
+        contadorAtaques++;
+        int danioTotal = danioBase;
+        if (contadorAtaques % 2 == 0) {
+            danioTotal *= 2;
+        }
+        
+        enemigo.recibirAtaque(danioTotal);
     }
 
     @Override
     public void descansar() {
-        // TODO: completar metodo
+        haSidoAtacado = false;
+        saludMaxima += 50;
+        salud += 50;
     }
 
     @Override
     public void recibirAtaque(int danio) {
-        this.salud -= danio * 2;
+        haSidoAtacado = true;
+        super.recibirAtaque(danio * 2);
     }
 }

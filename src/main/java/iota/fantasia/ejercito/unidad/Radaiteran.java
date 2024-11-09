@@ -9,16 +9,22 @@ public class Radaiteran extends Unidad {
     private int contadorAtaques = 0;
 
     public Radaiteran() {
-        super(53, 53, 27, 5, 46);
+        super(36, 36, 56, 17, 41);
     }
 
     @Override
     public void atacar(Unidad enemigo) {
+        if (!estaVivo() || !enemigo.estaVivo()) {
+            return;
+        }
 
+        contadorAtaques++;
+        int danioTotal = danioBase + (3 * contadorAtaques);
+        enemigo.recibirAtaque(danioTotal);
     }
 
     @Override
     public void descansar() {
-
+        // No hace nada al descansar
     }
 }

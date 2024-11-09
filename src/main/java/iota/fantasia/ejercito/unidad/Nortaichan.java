@@ -13,8 +13,8 @@ import java.util.List;
 public class Nortaichan extends Unidad {
     private boolean enfurecido = false;
     private boolean dePiedra = false;
-    private int contadorAtaques = 0;
-    private int contadorDescansos = 0;
+    private int turnosEnfurecido = 0;
+    private int turnosPiedra = 0;
 
     public Nortaichan() {
         super(66, 66, 18, 16, 22);
@@ -22,16 +22,50 @@ public class Nortaichan extends Unidad {
 
     @Override
     public void atacar(Unidad enemigo) {
-        // TODO: completar metodo
+        if (!estaVivo() || !enemigo.estaVivo() || dePiedra) {
+            return;
+        }
+
+        int danioTotal = danioBase;
+        if (enfurecido) {
+            danioTotal *= 2;
+            turnosEnfurecido--;
+            if (turnosEnfurecido <= 0) {
+                enfurecido = false;
+            }
+        }
+
+        enemigo.recibirAtaque(danioTotal);
+        
+        // Curación del 4% de su salud
+        int curacion = (int) (saludMaxima * 0.04);
+        salud = Math.min(saludMaxima, salud + curacion);
     }
 
     @Override
     public void descansar() {
-        // TODO: completar metodo
+        // Recupera toda su salud
+        salud = saludMaxima;
+        
+        // Se vuelve de piedra por 2 turnos
+        dePiedra = true;
+        turnosPiedra = 2;
     }
 
     @Override
     public void recibirAtaque(int danio) {
-        // TODO: completar metodo
+        int danioFinal = dePiedra ? danio / 2 : danio;
+        super.recibirAtaque(danioFinal);
+        
+        if (dePiedra) {
+            turnosPiedra--;
+            if (turnosPiedra <= 0) {
+                dePiedra = false;
+            }
+        } else {
+            // Se enfurece por 2 turnos al recibir daño
+            enfurecido = true;
+            turnosEnfurecido = 2;
+        }
     }
 }
