@@ -101,8 +101,10 @@ public class Ejercito extends Atacable {
     }
 }
 
+/*
 ejercito ejercito aliado[u1,u2,u3];ejercito propio[u4,u5,u6];[u1,u2,u3,u4,u5,u6,u7,u8,u9]
 
 ataco,ordeno[u1,u2,u3,u7,u8,u9,u4,u5,u6]
 
 ejercito aliado[u7,u8,u9]
+*/
