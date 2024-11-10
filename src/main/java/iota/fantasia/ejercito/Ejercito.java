@@ -1,5 +1,7 @@
 package iota.fantasia.ejercito;
 
+import iota.fantasia.ejercito.enums.Raza;
+import iota.fantasia.ejercito.factory.UnidadFactory;
 import iota.fantasia.ejercito.unidad.Unidad;
 
 import java.util.ArrayList;
@@ -13,8 +15,19 @@ public class Ejercito extends Atacable {
         this.unidades = new ArrayList<>(unidades);
     }
 
+    public Ejercito(int cantidad, Raza raza) {
+        this.unidades = new ArrayList<>();
+        agregarUnidades(cantidad, raza);
+    }
+
     public void agregarUnidad(Unidad unidad) {
         unidades.add(unidad);
+    }
+
+    public void agregarUnidades(int cantidad, Raza raza) {
+        for (int i = 0; i < cantidad; i++) {
+            unidades.add(UnidadFactory.crearUnidad(raza));
+        }
     }
 
     public void atacar(Ejercito enemigo) {
@@ -22,21 +35,20 @@ public class Ejercito extends Atacable {
             return;
         }
 
-        unidades.stream()
+        // Obtener la primera unidad viva de cada ejército
+        Unidad atacante = unidades.stream()
                 .filter(Unidad::estaVivo)
-                .forEach(unidad -> {
-                    Unidad objetivo = enemigo.obtenerObjetivoMasDebil();
-                    if (objetivo != null) {
-                        unidad.atacar(objetivo);
-                    }
-                });
-    }
-
-    private Unidad obtenerObjetivoMasDebil() {
-        return unidades.stream()
-                .filter(Unidad::estaVivo)
-                .min(Comparator.comparingInt(Unidad::getSalud))
+                .findFirst()
                 .orElse(null);
+        
+        Unidad defensor = enemigo.unidades.stream()
+                .filter(Unidad::estaVivo)
+                .findFirst()
+                .orElse(null);
+
+        if (atacante != null && defensor != null) {
+            atacante.atacar(defensor);
+        }
     }
 
     public boolean tieneUnidadesVivas() {
@@ -63,5 +75,25 @@ public class Ejercito extends Atacable {
 
     public List<Unidad> getUnidades() {
         return unidades;
+    }
+
+    public double getPorcentajeVidaTotal() {
+        if (unidades.isEmpty()) return 0.0;
+
+        double vidaActual = unidades.stream()
+                .mapToDouble(Unidad::getSalud)
+                .sum();
+
+        double vidaMaxima = unidades.stream()
+                .mapToDouble(Unidad::getSaludMaxima)
+                .sum();
+
+        return (vidaActual / vidaMaxima) * 100;
+    }
+
+    public List<Unidad> getUnidadesVivas() {
+        return unidades.stream()
+                .filter(Unidad::estaVivo)
+                .toList();
     }
 }

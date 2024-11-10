@@ -1,48 +1,48 @@
 package iota.fantasia.mapa;
 
-import java.util.Collection;
+import iota.fantasia.mapa.records.Camino;
+import iota.fantasia.mapa.records.DatosArchivo;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Mapa {
-    private static Mapa instancia;
     private final Map<Integer, Poblado> poblados;
-    private final Map<Integer, Map<Integer, Integer>> distancias;
 
-    private Mapa(List<Poblado> poblados, List<Camino> caminos) {
+    public Mapa(DatosArchivo datosArchivo) {
         this.poblados = new HashMap<>();
-        this.distancias = new HashMap<>();
-        
-        // Inicializar poblados
-        poblados.forEach(p -> this.poblados.put(p.getId(), p));
-        
-        // Inicializar matriz de distancias
-        caminos.forEach(c -> {
-            distancias.computeIfAbsent(c.getOrigen().getId(), k -> new HashMap<>())
-                     .put(c.getDestino().getId(), c.getDistancia());
-            distancias.computeIfAbsent(c.getDestino().getId(), k -> new HashMap<>())
-                     .put(c.getOrigen().getId(), c.getDistancia());
-        });
+        armarMapaPoblados(datosArchivo.poblados(), datosArchivo.caminos());
     }
 
-    public static synchronized Mapa getInstancia(List<Poblado> poblados, List<Camino> caminos) {
-        if (instancia == null) {
-            instancia = new Mapa(poblados, caminos);
+    private void armarMapaPoblados(Set<Poblado> poblados, List<Camino> caminos) {
+        // agregar los poblados
+        for (Poblado poblado : poblados) {
+            this.poblados.put(poblado.getId(), poblado);
         }
-        return instancia;
+
+        // agregar las rutas
+        for (Camino camino : caminos) {
+            this.poblados.get(camino.origen()).agregarCamino(camino.destino(), camino.distancia());
+            this.poblados.get(camino.destino()).agregarCamino(camino.origen(), camino.distancia());
+        }
     }
 
-    public int obtenerDistancia(Poblado origen, Poblado destino) {
-        return distancias.get(origen.getId())
-                        .getOrDefault(destino.getId(), Integer.MAX_VALUE);
+    public Map<Integer, Poblado> getPoblados() {
+        return poblados;
     }
 
     public Poblado obtenerPoblado(int id) {
         return poblados.get(id);
     }
 
-    public Collection<Poblado> obtenerPoblados() {
-        return poblados.values();
+    public int obtenerDistancia(int origen, int destino) {
+        Poblado pobladoOrigen = poblados.get(origen);
+        return pobladoOrigen.getCaminos().stream()
+                .filter(camino -> camino.destino() == destino)
+                .findFirst()
+                .map(Camino::distancia)
+                .orElse(Integer.MAX_VALUE);
     }
 }
