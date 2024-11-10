@@ -1,60 +1,104 @@
 package iota.fantasia.ejercito;
 
+import iota.fantasia.ejercito.enums.Raza;
+import iota.fantasia.ejercito.factory.UnidadFactory;
 import iota.fantasia.ejercito.unidad.Unidad;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.ArrayList;
 
 public class Ejercito extends Atacable {
-    private List<Atacable> unidades;
 
-    public Ejercito(Atacable unidades) {
-        this.unidades.add(unidades);
-    }
+    private final List<Unidad> unidades;
 
-    public void agregarUnidad(Atacable unidad) {
-    	switch(unidad.getBando()) {
-    		case ALIADO:
-    			concatenarPrincipio(unidad);
-    			break;
-    		case PROPIO:
-    			concatenarFinal(unidad);
-    			break;
-    		case ENEMIGO:
-    			concatenarFinal(unidad);
-    			break;
-    	}
-    }
-    
-    public void concatenarPrincipio(Atacable unidad) {
-    	List<Atacable> auxiliar = new ArrayList<Atacable>();
-    	auxiliar.add(unidad);
-    	auxiliar.addAll(this.unidades);
-    	this.unidades = auxiliar;
-    }
-    
-    public void concatenarFinal(Atacable unidad) {
-    	this.unidades.add(unidad);
+    public Ejercito(List<Unidad> unidades) {
+        this.unidades = new ArrayList<>(unidades);
     }
 
-    public void atacar(Atacable enemigo) {
-        // TODO: 
+    public Ejercito(int cantidad, Raza raza) {
+        this.unidades = new ArrayList<>();
+        agregarUnidades(cantidad, raza);
     }
-    
-    public void recibirAtaque(int danio) {
-    	
+
+    public void agregarUnidad(Unidad unidad) {
+        unidades.add(unidad);
     }
-    
-    public void descansar() {
-        // TODO: completar
+
+    public void agregarUnidades(int cantidad, Raza raza) {
+        for (int i = 0; i < cantidad; i++) {
+            unidades.add(UnidadFactory.crearUnidad(raza));
+        }
+    }
+
+    public void atacar(Ejercito enemigo) {
+        if (!tieneUnidadesVivas() || !enemigo.tieneUnidadesVivas()) {
+            return;
+        }
+
+        // Obtener la primera unidad viva de cada ejército
+        Unidad atacante = unidades.stream()
+                .filter(Unidad::estaVivo)
+                .findFirst()
+                .orElse(null);
+        
+        Unidad defensor = enemigo.unidades.stream()
+                .filter(Unidad::estaVivo)
+                .findFirst()
+                .orElse(null);
+
+        if (atacante != null && defensor != null) {
+            atacante.atacar(defensor);
+        }
     }
 
     public boolean tieneUnidadesVivas() {
-        // TODO: completar
+        return unidades.stream().anyMatch(Unidad::estaVivo);
     }
 
-    
+    public void descansar() {
+        unidades.stream()
+                .filter(Unidad::estaVivo)
+                .forEach(Unidad::descansar);
+    }
+
+    @Override
+    public void recibirAtaque(int danio) {
+        // El ejército distribuye el daño entre todas las unidades vivas
+        int unidadesVivas = (int) unidades.stream().filter(Unidad::estaVivo).count();
+        if (unidadesVivas > 0) {
+            int danioPorUnidad = danio / unidadesVivas;
+            unidades.stream()
+                    .filter(Unidad::estaVivo)
+                    .forEach(unidad -> unidad.recibirAtaque(danioPorUnidad));
+        }
+    }
+
+    public List<Unidad> getUnidades() {
+        return unidades;
+    }
+
+    public double getPorcentajeVidaTotal() {
+        if (unidades.isEmpty()) return 0.0;
+
+        double vidaActual = unidades.stream()
+                .mapToDouble(Unidad::getSalud)
+                .sum();
+
+        double vidaMaxima = unidades.stream()
+                .mapToDouble(Unidad::getSaludMaxima)
+                .sum();
+
+        return (vidaActual / vidaMaxima) * 100;
+    }
+
+    public List<Unidad> getUnidadesVivas() {
+        return unidades.stream()
+                .filter(Unidad::estaVivo)
+                .toList();
+    }
 }
 
 ejercito ejercito aliado[u1,u2,u3];ejercito propio[u4,u5,u6];[u1,u2,u3,u4,u5,u6,u7,u8,u9]

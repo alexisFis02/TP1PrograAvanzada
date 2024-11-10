@@ -5,40 +5,91 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96fea2d2-5be1-49b9-9069-aa084b03421c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/batalla/Batalla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/batalla/Batalla.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/Ejercito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/Ejercito.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Nortaichan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Nortaichan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Radaiteran.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Radaiteran.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Reralopes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Reralopes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Unidad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Unidad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Wrives.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Wrives.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Camino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Camino.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Mapa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Mapa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Poblado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Poblado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mision/Mision.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mision/Mision.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="UML Class" />
+        <option value="UML Activity" />
+        <option value="UML Sequence" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;alexisFis02&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/alexisFis02/TP1PrograAvanzada.git&quot;,
+    &quot;accountId&quot;: &quot;4d0d72d7-db50-4146-a557-7ec31d4bdecc&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2n4WLgX9mIDcOAL7FxRalEZSkLm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/home/sask/IdeaProjects/ReconquistandoLaTierraDeFantasia/src/main/java/org/iota/Main.java",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Sequence&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sask/workspace-web/gestion-materias&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/sask/IdeaProjects/ReconquistandoLaTierraDeFantasia/src/main/java/org/iota/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="iota.fantasia.ejercito" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.419" />
-        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.419" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
@@ -50,22 +101,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1728232774241</updated>
-      <workItem from="1728232775315" duration="3000" />
+      <workItem from="1728232775315" duration="385000" />
+      <workItem from="1728233174669" duration="55000" />
+      <workItem from="1728233403594" duration="9583000" />
+      <workItem from="1728252219028" duration="582000" />
+      <workItem from="1728515210967" duration="4072000" />
+      <workItem from="1730325895920" duration="88000" />
+      <workItem from="1731165535804" duration="7740000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/iota/Main.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
