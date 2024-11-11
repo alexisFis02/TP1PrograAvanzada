@@ -33,8 +33,7 @@ public class Ejercito extends Atacable {
         }
     }
 
-    @Override
-    public void atacar(Atacable enemigo) {
+    public void atacar(Ejercito enemigo) {
         if (!tieneUnidadesVivas() || !enemigo.tieneUnidadesVivas()) {
             return;
         }
