@@ -33,7 +33,8 @@ public class Ejercito extends Atacable {
         }
     }
 
-    public void atacar(Ejercito enemigo) {
+    @Override
+    public void atacar(Atacable enemigo) {
         if (!tieneUnidadesVivas() || !enemigo.tieneUnidadesVivas()) {
             return;
         }
@@ -99,6 +100,7 @@ public class Ejercito extends Atacable {
                 .filter(Unidad::estaVivo)
                 .toList();
     }
+
 }
 
 /*
