@@ -45,4 +45,9 @@ public class Mapa {
                 .map(Camino::distancia)
                 .orElse(Integer.MAX_VALUE);
     }
+
+	@Override
+	public String toString() {
+		return "Mapa [poblados=" + poblados + "]";
+	}
 }

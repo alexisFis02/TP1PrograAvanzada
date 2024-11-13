@@ -32,7 +32,8 @@ public class CalculadorMision {
     }
 
     public boolean esMisionFactible() {
-        return ejercitoFinal != null && ejercitoFinal.tieneUnidadesVivas();
+        //return ejercitoFinal != null && ejercitoFinal.estaVivo();
+    	return ejercitoFinal.estaVivo();
     }
 
     public int calcularGuerrerosFinales() {
@@ -63,7 +64,7 @@ public class CalculadorMision {
 
             switch (poblado.getBando()) {
                 case PROPIO:
-                    ejercitoActual.descansar();
+                    //ejercitoActual.descansar(); //No lo especifica la consigna
                     logAcciones.append("Descansando en poblado propio. Guerreros actuales: ")
                             .append(ejercitoActual.getUnidades().size())
                             .append(" (Salud: ").append(String.format("%.1f", ejercitoActual.getPorcentajeVidaTotal()))
@@ -74,6 +75,8 @@ public class CalculadorMision {
                     ejercitoActual.descansar();
                     int guerrerosAntes = ejercitoActual.getUnidades().size();
                     ejercitoActual.agregarUnidades(poblado.getHabitantes() / 2, poblado.getRaza());
+                    //se debe agregar cola para aliado
+                    //
                     logAcciones.append("Descansando y reclutando en poblado aliado. ")
                             .append("Guerreros antes: ").append(guerrerosAntes)
                             .append(", después: ").append(ejercitoActual.getUnidades().size())
@@ -95,7 +98,7 @@ public class CalculadorMision {
 
                     while (batallaEnCurso) {
 //                        logAcciones.append("Ronda ").append(ronda).append(" - ");
-                        ejercitoActual.atacar(ejercitoEnemigo);
+                        ejercitoActual.atacar(ejercitoEnemigo); //resta devolver el golpe
 //                        logAcciones.append("Enemigos restantes: ").append(ejercitoEnemigo.getUnidadesVivas().size())
 //                                .append(" (Salud: ").append(String.format("%.1f", ejercitoEnemigo.getPorcentajeVidaTotal()))
 //                                .append("%)")
@@ -103,14 +106,14 @@ public class CalculadorMision {
 //                                .append(" (Salud: ").append(String.format("%.1f", ejercitoActual.getPorcentajeVidaTotal()))
 //                                .append("%)\n");
 //
-                        if (!ejercitoEnemigo.tieneUnidadesVivas()) {
+                        if (!ejercitoEnemigo.estaVivo()) {
                             batallaEnCurso = false;
                             logAcciones.append("Victoria!\n");
                             continue;
                         }
 
                         ejercitoEnemigo.atacar(ejercitoActual);
-                        if (!ejercitoActual.tieneUnidadesVivas()) {
+                        if (!ejercitoActual.estaVivo()) {
                             logAcciones.append("Derrota! Nuestro ejercito ha sido destruido\n");
                             caminoAlcanzable.removeLast();
                             return null;

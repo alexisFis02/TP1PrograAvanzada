@@ -12,12 +12,12 @@ public class Batalla {
     }
 
     public boolean simularBatalla() {
-        while (ejercitoAliado.tieneUnidadesVivas() && ejercitoEnemigo.tieneUnidadesVivas()) {
+        while (ejercitoAliado.estaVivo() && ejercitoEnemigo.estaVivo()) {
             ejercitoAliado.atacar(ejercitoEnemigo);
-            if (ejercitoEnemigo.tieneUnidadesVivas()) {
+            if (ejercitoEnemigo.estaVivo()) {
                 ejercitoEnemigo.atacar(ejercitoAliado);
             }
         }
-        return ejercitoAliado.tieneUnidadesVivas();
+        return ejercitoAliado.estaVivo();
     }
 }
