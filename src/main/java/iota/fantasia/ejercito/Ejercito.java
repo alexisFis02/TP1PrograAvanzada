@@ -15,6 +15,9 @@ public class Ejercito extends Atacable {
     private final List<Unidad> unidades;
 
     public Ejercito(List<Unidad> unidades) {
+    	if(!unidades.isEmpty()) {
+    		throw new IllegalArgumentException("No se puede crear un ejercito sin unidades.");
+    	}
         this.unidades = new ArrayList<>(unidades);
     }
 
@@ -33,28 +36,25 @@ public class Ejercito extends Atacable {
         }
     }
 
-    public void atacar(Ejercito enemigo) {
-        if (!tieneUnidadesVivas() || !enemigo.tieneUnidadesVivas()) {
-            return;
-        }
+    public void atacar(Atacable enemigo) {
+        if (enemigo.estaVivo()) {
+        	// Obtener la primera unidad viva de cada ejército
+            Unidad atacante = unidades.stream()
+                    .filter(Unidad::estaVivo)
+                    .findFirst()
+                    .orElse(null);
+            
+//            Unidad defensor = enemigo.unidades.stream()
+//                    .filter(Unidad::estaVivo)
+//                    .findFirst()
+//                    .orElse(null);
 
-        // Obtener la primera unidad viva de cada ejército
-        Unidad atacante = unidades.stream()
-                .filter(Unidad::estaVivo)
-                .findFirst()
-                .orElse(null);
-        
-        Unidad defensor = enemigo.unidades.stream()
-                .filter(Unidad::estaVivo)
-                .findFirst()
-                .orElse(null);
-
-        if (atacante != null && defensor != null) {
-            atacante.atacar(defensor);
+                atacante.atacar(enemigo);
+            
         }
     }
 
-    public boolean tieneUnidadesVivas() {
+    public boolean estaVivo() {
         return unidades.stream().anyMatch(Unidad::estaVivo);
     }
 

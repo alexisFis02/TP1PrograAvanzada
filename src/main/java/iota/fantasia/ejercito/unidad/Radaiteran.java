@@ -1,4 +1,5 @@
 package iota.fantasia.ejercito.unidad;
+import iota.fantasia.ejercito.Atacable;
 
 /*
  * Una Radaiteran tiene una salud inicial de 36. Utiliza shurikens, y su rango de ataque es de 17 a 41 metros.
@@ -13,7 +14,7 @@ public class Radaiteran extends Unidad {
     }
 
     @Override
-    public void atacar(Unidad enemigo) {
+    public void atacar(Atacable enemigo) {
         if (!estaVivo() || !enemigo.estaVivo()) {
             return;
         }

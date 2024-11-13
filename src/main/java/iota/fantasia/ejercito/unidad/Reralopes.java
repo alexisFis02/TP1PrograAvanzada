@@ -1,5 +1,6 @@
 package iota.fantasia.ejercito.unidad;
 
+import iota.fantasia.ejercito.Atacable;
 /*
  * Una Reralopes tiene una salud inicial de 53. Utiliza una catapulta, y su rango de ataque es de 5 a 46 metros.
  * Ocasiona un daño básico de 27 puntos. Cuando ataca, erra 2 de cada 4 ataques.
@@ -16,7 +17,7 @@ public class Reralopes extends Unidad {
     }
 
     @Override
-    public void atacar(Unidad enemigo) {
+    public void atacar(Atacable enemigo) {
         if (!estaVivo() || !enemigo.estaVivo()) {
             return;
         }

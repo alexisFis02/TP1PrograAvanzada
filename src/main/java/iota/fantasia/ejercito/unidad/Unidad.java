@@ -18,11 +18,6 @@ public abstract class Unidad extends Atacable implements Comparable<Unidad> {
         this.rangoAtaqueMax = rangoAtaqueMax;
     }
 
-
-    public abstract void atacar(Unidad enemigo);
-
-    public abstract void descansar();
-
     public void recibirAtaque(int danio) {
         salud -= danio;
         if (salud < 0) {
