@@ -19,18 +19,19 @@ public class Reralopes extends Unidad {
     @Override
     public void atacar(Atacable enemigo) {
         contadorAtaques++;
+
         // Erra 2 de cada 4 ataques
-        if (contadorAtaques % 2 == 0) {
-            return;
+        if (! (contadorAtaques % 2 == 0)) {
+            enemigo.recibirAtaque(getDanioAlAtacar());
         }
 
-        int danioTotal = danioBase;
-        if (concentrado && ataquesPotenciados > 0) {
-            danioTotal *= 2;
+        if (concentrado) {
             ataquesPotenciados--;
         }
+    }
 
-        enemigo.recibirAtaque(danioTotal);
+    private int getDanioAlAtacar() {
+        return ataquesPotenciados > 0 ? danioBase * 2 : danioBase;
     }
 
     @Override
@@ -45,5 +46,13 @@ public class Reralopes extends Unidad {
         // Se desconcentra al recibir daño
         concentrado = false;
         ataquesPotenciados = 0;
+    }
+
+    public boolean isConcentrado() {
+        return concentrado;
+    }
+
+    public int getAtaquesPotenciados() {
+        return ataquesPotenciados;
     }
 }

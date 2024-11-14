@@ -18,6 +18,14 @@ public class Poblado {
 	// private Ejercito ejercito;
 	private final List<Camino> caminos;
 
+	public Poblado(int id) {
+		this.id = id;
+		this.habitantes = 0;
+		this.raza = null;
+		this.bando = null;
+		this.caminos = new ArrayList<>();
+	}
+
 	public Poblado(int id, int habitantes, Raza raza, Bando bando) {
 		this.id = id;
 		this.habitantes = habitantes;
@@ -60,11 +68,11 @@ public class Poblado {
 		return Integer.hashCode(id);
 	}
 
-	public void agregarCamino(int destino, int distancia) {
+	public void agregarCamino(int destino, int distanciaEnTiempo) {
 		if (destino == this.id) {
 			return;
 		}
-		caminos.add(new Camino(this.id, destino, distancia + 10));
+		caminos.add(new Camino(this.id, destino, distanciaEnTiempo + 10));
 	}
 
 	public List<Camino> getCaminos() {
@@ -73,7 +81,6 @@ public class Poblado {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
 }

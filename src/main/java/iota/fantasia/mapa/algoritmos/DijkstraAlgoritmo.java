@@ -7,19 +7,19 @@ import iota.fantasia.mapa.records.Camino;
 import java.util.*;
 
 public class DijkstraAlgoritmo {
-    public static ResultadoCamino encontrarCaminoMasCorto(Mapa mapa, Poblado origen, Poblado destino) {
-        Map<Poblado, Integer> distancias = new HashMap<>();
+    public static ResultadoCamino encontrarCaminoMasRapido(Mapa mapa, Poblado origen, Poblado destino) {
+        Map<Poblado, Integer> tiempos = new HashMap<>();
         Map<Integer, Integer> previos = new HashMap<>();
         Set<Poblado> visitados = new HashSet<>();
         PriorityQueue<NodoCamino> cola = new PriorityQueue<>();
 
         // Inicializar distancias con infinito
         for (Poblado poblado : mapa.getPoblados().values()) {
-            distancias.put(poblado, Integer.MAX_VALUE);
+            tiempos.put(poblado, Integer.MAX_VALUE);
         }
 
         // Distancia al origen es 0
-        distancias.put(origen, 0);
+        tiempos.put(origen, 0);
         cola.offer(new NodoCamino(origen, 0));
 
         while (!cola.isEmpty()) {
@@ -38,12 +38,12 @@ public class DijkstraAlgoritmo {
             // Explorar vecinos
             for (Camino camino : actual.getCaminos()) {
                 Poblado pobladoVecino = mapa.getPoblados().get(camino.destino());
-                int distanciaVecino = camino.distancia();
+                int distanciaVecino = camino.distanciaEnTiempo();
 
-                int nuevaDistancia = distancias.get(actual) + distanciaVecino;
+                int nuevaDistancia = tiempos.get(actual) + distanciaVecino;
 
-                if (nuevaDistancia < distancias.get(pobladoVecino)) {
-                    distancias.put(pobladoVecino, nuevaDistancia);
+                if (nuevaDistancia < tiempos.get(pobladoVecino)) {
+                    tiempos.put(pobladoVecino, nuevaDistancia);
                     previos.put(pobladoVecino.getId(), actual.getId());
                     cola.offer(new NodoCamino(pobladoVecino, nuevaDistancia));
                 }
@@ -51,9 +51,9 @@ public class DijkstraAlgoritmo {
         }
 
         List<Poblado> camino = reconstruirCamino(previos, origen, destino, mapa);
-        int distanciaTotal = distancias.get(destino);
+        int tiempoTotal = tiempos.get(destino);
 
-        return new ResultadoCamino(camino, distanciaTotal);
+        return new ResultadoCamino(camino, tiempoTotal);
     }
 
     private static List<Poblado> reconstruirCamino(Map<Integer, Integer> previos,

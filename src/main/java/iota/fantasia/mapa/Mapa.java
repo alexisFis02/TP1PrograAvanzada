@@ -11,6 +11,10 @@ import java.util.Set;
 public class Mapa {
     private final Map<Integer, Poblado> poblados;
 
+    public Mapa(Map<Integer, Poblado> poblados) {
+        this.poblados = poblados;
+    }
+
     public Mapa(DatosArchivo datosArchivo) {
         this.poblados = new HashMap<>();
         armarMapaPoblados(datosArchivo.poblados(), datosArchivo.caminos());
@@ -24,8 +28,8 @@ public class Mapa {
 
         // agregar las rutas
         for (Camino camino : caminos) {
-            this.poblados.get(camino.origen()).agregarCamino(camino.destino(), camino.distancia());
-            this.poblados.get(camino.destino()).agregarCamino(camino.origen(), camino.distancia());
+            this.poblados.get(camino.origen()).agregarCamino(camino.destino(), camino.distanciaEnTiempo());
+            this.poblados.get(camino.destino()).agregarCamino(camino.origen(), camino.distanciaEnTiempo());
         }
     }
 
@@ -42,7 +46,7 @@ public class Mapa {
         return pobladoOrigen.getCaminos().stream()
                 .filter(camino -> camino.destino() == destino)
                 .findFirst()
-                .map(Camino::distancia)
+                .map(Camino::distanciaEnTiempo)
                 .orElse(Integer.MAX_VALUE);
     }
 

@@ -22,7 +22,7 @@ public class CalculadorMision {
 	public CalculadorMision(Mapa mapa, int origen, int destino) {
 		this.origen = mapa.obtenerPoblado(origen);
 		Poblado destino1 = mapa.obtenerPoblado(destino);
-		ResultadoCamino resultado = DijkstraAlgoritmo.encontrarCaminoMasCorto(mapa, this.origen, destino1);
+		ResultadoCamino resultado = DijkstraAlgoritmo.encontrarCaminoMasRapido(mapa, this.origen, destino1);
 		this.rutaOptima = resultado.camino();
 		this.tiempoTotal = (int) Math.ceil(resultado.distanciaTotal() / (double) KILOMETROS_POR_DIA);
 		this.caminoAlcanzable = new ArrayList<>();

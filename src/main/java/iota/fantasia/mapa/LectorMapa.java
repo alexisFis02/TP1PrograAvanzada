@@ -121,7 +121,7 @@ public class LectorMapa {
                 int distancia = Integer.parseInt(datos[2]);
 
                 if (distancia <= 0) {
-                    throw new IOException("La distancia debe ser positiva: " + linea);
+                    throw new IOException("La distanciaEnTiempo debe ser positiva: " + linea);
                 }
                 if (origen == destino) {
                     throw new IOException("El origen y destino no pueden ser iguales: " + linea);

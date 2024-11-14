@@ -10,25 +10,25 @@ import iota.fantasia.ejercito.Atacable;
  * Gracias a esto, aumenta su salud y su salud máxima en 50.
  * */
 public class Wrives extends Unidad {
-    private boolean haSidoAtacado = false;
+    private boolean haSidoAtacado = true; // inicialmente ataca
     private int contadorAtaques = 0;
 
     public Wrives() {
-        // TODO: pasar a constantes
         super(108, 108, 113, 14, 28);
     }
 
     @Override
     public void atacar(Atacable enemigo) {
-        if (!estaVivo() || !enemigo.estaVivo() || !haSidoAtacado) {
+        if (!haSidoAtacado) {
             return;
         }
 
         contadorAtaques++;
         int danioTotal = danioBase;
-        if (contadorAtaques % 2 == 0) {
+        if (contadorAtaques % 3 == 0) {
             danioTotal *= 2;
         }
+
 
         enemigo.recibirAtaque(danioTotal);
     }

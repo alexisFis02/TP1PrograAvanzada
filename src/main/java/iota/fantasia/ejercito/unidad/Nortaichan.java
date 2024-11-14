@@ -5,7 +5,8 @@ import iota.fantasia.ejercito.Atacable;
  * Un Nortaichian tiene una salud inicial de 66. Utiliza un arco, y su rango de ataque es de 16 a 22 metros.
  * Ocasiona un daño básico de 18 puntos. Cuando ataca, se cura un 4 por ciento de su salud.
  * Al recibir un ataque se enfurece y sus ataques multiplican por 2 su daño (dura 2 turnos propios).
- * Cuando descansa, recupera toda su salud, pero se vuelve de piedra por 2 turnos (contiguos), lo que hace que no pueda atacar, pero reduce el daño entrante en 1/2.
+ * Cuando descansa, recupera toda su salud, pero se vuelve de piedra por 2 turnos (contiguos),
+ * lo que hace que no pueda atacar, pero reduce el daño entrante en 1/2.
  * */
 public class Nortaichan extends Unidad {
     private boolean enfurecido = false;
@@ -20,20 +21,28 @@ public class Nortaichan extends Unidad {
     
     public void atacar(Atacable enemigo) {
         if (dePiedra) {
+            turnosPiedra--;
             return;
         }
 
-        int danioTotal = danioBase;
+        enemigo.recibirAtaque(getDanioAlAtacar());
+
+        recuperarSalud();
+    }
+
+    private int getDanioAlAtacar() {
+        int danio= danioBase;
         if (enfurecido) {
-            danioTotal *= 2;
+            danio*= 2;
             turnosEnfurecido--;
             if (turnosEnfurecido <= 0) {
                 enfurecido = false;
             }
         }
+        return danio;
+    }
 
-        enemigo.recibirAtaque(danioTotal);
-
+    private void recuperarSalud() {
         int curacion = (int) (saludMaxima * 0.04);
         int saludAntes = salud;
         salud = Math.min(saludMaxima, salud + curacion);
@@ -49,6 +58,9 @@ public class Nortaichan extends Unidad {
         turnosPiedra = 2;
     }
 
+    /*
+    * Se asume que no se puede enfurecer cuando esta de piedra
+    * */
     @Override
     public void recibirAtaque(int danio) {
         int danioFinal = dePiedra ? danio / 2 : danio;
@@ -64,5 +76,17 @@ public class Nortaichan extends Unidad {
             enfurecido = true;
             turnosEnfurecido = 2;
         }
+    }
+
+    public boolean isEnfurecido() {
+        return enfurecido;
+    }
+
+    public int getTurnosEnfurecido() {
+        return turnosEnfurecido;
+    }
+
+    public boolean isDePiedra() {
+        return dePiedra;
     }
 }

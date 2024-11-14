@@ -11,6 +11,7 @@ public class Batalla {
         this.ejercitoEnemigo = ejercitoEnemigo;
     }
 
+    // TODO: usar esto en calculador
     public boolean simularBatalla() {
         while (ejercitoAliado.estaVivo() && ejercitoEnemigo.estaVivo()) {
             ejercitoAliado.atacar(ejercitoEnemigo);

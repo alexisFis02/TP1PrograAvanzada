@@ -7,23 +7,26 @@
     <list default="true" id="96fea2d2-5be1-49b9-9069-aa084b03421c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/batalla/Batalla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/batalla/Batalla.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/Ejercito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/Ejercito.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/Atacable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/Atacable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Nortaichan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Nortaichan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Radaiteran.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Radaiteran.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Reralopes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Reralopes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Unidad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Unidad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Wrives.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/ejercito/unidad/Wrives.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Camino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Camino.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/LectorMapa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/LectorMapa.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Mapa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Mapa.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Poblado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/Poblado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mision/Mision.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mision/Mision.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/algoritmos/DijkstraAlgoritmo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/algoritmos/DijkstraAlgoritmo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/records/Camino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mapa/records/Camino.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iota/fantasia/mision/calculador/CalculadorMision.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iota/fantasia/mision/calculador/CalculadorMision.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/iota/fantasia/mapa/algoritmos/DijkstraAlgoritmoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/iota/fantasia/mapa/algoritmos/DijkstraAlgoritmoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/htmlReport" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -59,31 +62,127 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Sequence&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sask/workspace-web/gestion-materias&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/sask/IdeaProjects/ReconquistandoLaTierraDeFantasia/src/main/java/org/iota/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultPlantUmlFileTemplate": "UML Sequence",
+    "JUnit.DijkstraAlgoritmoTest.encontrarCaminoMasCorto_CaminoDirecto.executor": "Run",
+    "JUnit.NortaichanTest.executor": "Run",
+    "JUnit.NortaichanTest.testTurnosDePiedra.executor": "Run",
+    "JUnit.NortaichanTest.testTurnosEnfurecido.executor": "Run",
+    "JUnit.ReralopesTest.executor": "Run",
+    "JUnit.ReralopesTest.testAtacarConConcentracion.executor": "Run",
+    "JUnit.ReralopesTest.testAtacarErrar.executor": "Run",
+    "JUnit.ReralopesTest.testDescansarYDescansar.executor": "Run",
+    "JUnit.WrivesTest.executor": "Run",
+    "JUnit.WrivesTest.testAtacar.executor": "Debug",
+    "JUnit.WrivesTest.testAtacarConDobleDanio.executor": "Debug",
+    "JUnit.WrivesTest.testDescansarYAtacar.executor": "Run",
+    "JUnit.unidad in ReconquistandoLaTierraDeFantasia.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "test",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/sask/workspace-web",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/home/sask/IdeaProjects/ReconquistandoLaTierraDeFantasia/src/main/java/org/iota/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="iota.fantasia.ejercito" />
     </key>
+  </component>
+  <component name="RunManager" selected="JUnit.fantasia in ReconquistandoLaTierraDeFantasia">
+    <configuration name="DijkstraAlgoritmoTest.encontrarCaminoMasCorto_CaminoDirecto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ReconquistandoLaTierraDeFantasia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="iota.fantasia.mapa.algoritmos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="iota.fantasia.mapa.algoritmos" />
+      <option name="MAIN_CLASS_NAME" value="iota.fantasia.mapa.algoritmos.DijkstraAlgoritmoTest" />
+      <option name="METHOD_NAME" value="encontrarCaminoMasCorto_CaminoDirecto" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NortaichanTest.testTurnosDePiedra" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ReconquistandoLaTierraDeFantasia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="iota.fantasia.ejercito.unidad.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="iota.fantasia.ejercito.unidad" />
+      <option name="MAIN_CLASS_NAME" value="iota.fantasia.ejercito.unidad.NortaichanTest" />
+      <option name="METHOD_NAME" value="testTurnosDePiedra" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NortaichanTest.testTurnosEnfurecido" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ReconquistandoLaTierraDeFantasia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="iota.fantasia.ejercito.unidad.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="iota.fantasia.ejercito.unidad" />
+      <option name="MAIN_CLASS_NAME" value="iota.fantasia.ejercito.unidad.NortaichanTest" />
+      <option name="METHOD_NAME" value="testTurnosEnfurecido" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReralopesTest.testDescansarYDescansar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ReconquistandoLaTierraDeFantasia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="iota.fantasia.ejercito.unidad.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="iota.fantasia.ejercito.unidad" />
+      <option name="MAIN_CLASS_NAME" value="iota.fantasia.ejercito.unidad.ReralopesTest" />
+      <option name="METHOD_NAME" value="testDescansarYDescansar" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fantasia in ReconquistandoLaTierraDeFantasia" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ReconquistandoLaTierraDeFantasia" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/iota/fantasia" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.fantasia in ReconquistandoLaTierraDeFantasia" />
+        <item itemvalue="JUnit.NortaichanTest.testTurnosEnfurecido" />
+        <item itemvalue="JUnit.NortaichanTest.testTurnosDePiedra" />
+        <item itemvalue="JUnit.DijkstraAlgoritmoTest.encontrarCaminoMasCorto_CaminoDirecto" />
+        <item itemvalue="JUnit.ReralopesTest.testDescansarYDescansar" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -108,10 +207,27 @@
       <workItem from="1728515210967" duration="4072000" />
       <workItem from="1730325895920" duration="88000" />
       <workItem from="1731165535804" duration="7740000" />
+      <workItem from="1731555829316" duration="3959000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="((UnidadMock)enemigo).salud" custom="iota.fantasia.ejercito.unidad.UnidadMock" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ReconquistandoLaTierraDeFantasia$LectorMapaTest.ic" NAME="LectorMapaTest Coverage Results" MODIFIED="1731549787959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>iota.fantasia.mapa.*</FILTER>
+    </SUITE>
   </component>
 </project>

@@ -14,4 +14,8 @@ public abstract class Atacable {
 	protected Bando getBando() {
 		return bando;
 	};
+
+	public int getSalud() {
+		return 0;
+	}
 }
