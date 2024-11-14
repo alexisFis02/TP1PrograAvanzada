@@ -1,5 +1,7 @@
 package iota.fantasia.ejercito;
 
+import iota.fantasia.ejercito.enums.Bando;
+
 public abstract class Atacable {
 	protected Bando bando;
     

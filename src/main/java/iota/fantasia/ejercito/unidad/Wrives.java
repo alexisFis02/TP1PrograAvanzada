@@ -1,6 +1,7 @@
 package iota.fantasia.ejercito.unidad;
 
 import iota.fantasia.ejercito.Atacable;
+import iota.fantasia.ejercito.enums.Bando;
 
 /*
  * Un Wrives tiene una salud inicial de 108. Utiliza magia, y su rango de ataque es de 14 a 28 metros.
@@ -14,7 +15,11 @@ public class Wrives extends Unidad {
     private int contadorAtaques = 0;
 
     public Wrives() {
-        super(108, 108, 113, 14, 28);
+        super(108, 108, 113, 14, 28,null);
+    }
+
+    public Wrives(Bando bando) {
+        super(108, 108, 113, 14, 28, bando);
     }
 
     @Override

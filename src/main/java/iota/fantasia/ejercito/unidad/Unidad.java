@@ -1,6 +1,7 @@
 package iota.fantasia.ejercito.unidad;
 
 import iota.fantasia.ejercito.Atacable;
+import iota.fantasia.ejercito.enums.Bando;
 
 public abstract class Unidad extends Atacable {
 
@@ -10,12 +11,22 @@ public abstract class Unidad extends Atacable {
     protected int rangoAtaqueMin;
     protected int rangoAtaqueMax;
 
+    public Unidad(int salud, int saludMaxima, int danioBase, int rangoAtaqueMin, int rangoAtaqueMax, Bando bando) {
+        this.salud = salud;
+        this.saludMaxima = saludMaxima;
+        this.danioBase = danioBase;
+        this.rangoAtaqueMin = rangoAtaqueMin;
+        this.rangoAtaqueMax = rangoAtaqueMax;
+        this.bando = bando;
+    }
+
     public Unidad(int salud, int saludMaxima, int danioBase, int rangoAtaqueMin, int rangoAtaqueMax) {
         this.salud = salud;
         this.saludMaxima = saludMaxima;
         this.danioBase = danioBase;
         this.rangoAtaqueMin = rangoAtaqueMin;
         this.rangoAtaqueMax = rangoAtaqueMax;
+        this.bando = Bando.NEUTRAL;
     }
 
     public void recibirAtaque(int danio) {

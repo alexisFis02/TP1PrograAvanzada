@@ -1,5 +1,6 @@
 package iota.fantasia.ejercito;
 
+import iota.fantasia.ejercito.enums.Bando;
 import iota.fantasia.ejercito.enums.Raza;
 import iota.fantasia.ejercito.factory.UnidadFactory;
 import iota.fantasia.ejercito.unidad.Unidad;
@@ -32,19 +33,19 @@ public class Ejercito extends Atacable {
 
 	public void agregarUnidadesPropias(int cantidad, Raza raza) {
 		for (int i = 0; i < cantidad; i++) {
-			unidadesPropias.add(UnidadFactory.crearUnidad(raza));
+			unidadesPropias.add(UnidadFactory.crearUnidad(raza,Bando.PROPIO));
 		}
 	}
 
 	public void agregarUnidadesAliadas(int cantidad, Raza raza) {
 		for (int i = 0; i < cantidad; i++) {
-			unidadesAliadas.add(UnidadFactory.crearUnidad(raza));
+			unidadesAliadas.add(UnidadFactory.crearUnidad(raza, Bando.ALIADO));
 		}
 	}
 
 	public void agregarUnidades(int cantidad, Raza raza, Bando bando) {
 		switch (bando) {
-		case PROPIO, ENEMIGO -> agregarUnidadesPropias(cantidad, raza);
+		case PROPIO -> agregarUnidadesPropias(cantidad, raza);
 		case ALIADO -> agregarUnidadesAliadas(cantidad, raza);
         }
 	}

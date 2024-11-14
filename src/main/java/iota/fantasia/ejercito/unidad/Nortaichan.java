@@ -1,5 +1,6 @@
 package iota.fantasia.ejercito.unidad;
 import iota.fantasia.ejercito.Atacable;
+import iota.fantasia.ejercito.enums.Bando;
 
 /*
  * Un Nortaichian tiene una salud inicial de 66. Utiliza un arco, y su rango de ataque es de 16 a 22 metros.
@@ -15,9 +16,12 @@ public class Nortaichan extends Unidad {
     private int turnosPiedra = 0;
 
     public Nortaichan() {
-        super(66, 66, 18, 16, 22);
+        super(66, 66, 18, 16, 22,null);
     }
 
+    public Nortaichan(Bando bando) {
+        super(66, 66, 18, 16, 22, bando);
+    }
     
     public void atacar(Atacable enemigo) {
         if (dePiedra) {

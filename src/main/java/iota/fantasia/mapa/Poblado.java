@@ -34,17 +34,13 @@ public class Poblado {
 		this.caminos = new ArrayList<>();
 	}
 
-	public Ejercito generarEjercito() {
+    public Ejercito generarEjecitoConBando(Bando bando) {
 		var unidades = new ArrayList<Unidad>();
 		for (int i = 0; i < habitantes; i++) {
-			unidades.add(UnidadFactory.crearUnidad(raza));
+			unidades.add(UnidadFactory.crearUnidadConBando(raza, bando));
 		}
 		return new Ejercito(unidades);
-	}
-
-//    public Ejercito getEjercito() {
-//        return ejercito;
-//    }
+    }
 
 	// Getters
 	public int getId() {

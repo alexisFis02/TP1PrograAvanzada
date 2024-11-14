@@ -1,5 +1,6 @@
 package iota.fantasia.ejercito;
 
+import iota.fantasia.ejercito.enums.Bando;
 import iota.fantasia.ejercito.enums.Raza;
 import iota.fantasia.ejercito.unidad.Unidad;
 import iota.fantasia.ejercito.unidad.UnidadMock;

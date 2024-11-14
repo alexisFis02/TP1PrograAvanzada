@@ -1,6 +1,7 @@
 package iota.fantasia.ejercito.unidad;
 
 import iota.fantasia.ejercito.Atacable;
+import iota.fantasia.ejercito.enums.Bando;
 
 // renombrar a maniqui
 public class UnidadMock extends Unidad {

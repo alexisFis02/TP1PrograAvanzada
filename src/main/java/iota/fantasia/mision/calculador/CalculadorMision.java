@@ -1,6 +1,6 @@
 package iota.fantasia.mision.calculador;
 
-import iota.fantasia.ejercito.Bando;
+import iota.fantasia.ejercito.enums.Bando;
 import iota.fantasia.ejercito.Ejercito;
 import iota.fantasia.mapa.Mapa;
 import iota.fantasia.mapa.Poblado;
@@ -67,7 +67,7 @@ public class CalculadorMision {
 				break;
 
 			case ENEMIGO:
-				Ejercito ejercitoEnemigo = poblado.generarEjercito();
+				Ejercito ejercitoEnemigo = poblado.generarEjecitoConBando(Bando.ENEMIGO);
 				logAcciones.append("¡Batalla! Enemigos: ").append(poblado.getRaza()).append("\n");
 
 				Batalla batalla = new Batalla(ejercitoActual, ejercitoEnemigo);
