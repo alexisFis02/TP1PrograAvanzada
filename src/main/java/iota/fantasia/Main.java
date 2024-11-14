@@ -6,8 +6,8 @@ import iota.fantasia.ejercito.enums.Bando;
 import iota.fantasia.mapa.LectorMapa;
 import iota.fantasia.mapa.Mapa;
 import iota.fantasia.mapa.Poblado;
-import iota.fantasia.mapa.records.DatosArchivo;
 import iota.fantasia.mapa.algoritmos.DijkstraAlgoritmo;
+import iota.fantasia.mapa.records.DatosArchivo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,8 +41,8 @@ public class Main {
                     .append(origen.getHabitantes()).append(" guerreros. \n");
 
             /*
-            * Se recorre la ruta más rapida calculada por el algoritmo de Dijkstra
-            * */
+             * Se recorre la ruta más rapida calculada por el algoritmo de Dijkstra
+             * */
             for (int i = 1; i < rutaOptima.size(); i++) {
                 Poblado poblado = rutaOptima.get(i);
                 caminoAlcanzable.add(poblado);

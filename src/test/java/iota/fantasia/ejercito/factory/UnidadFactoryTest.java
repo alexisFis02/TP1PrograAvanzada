@@ -4,7 +4,8 @@ import iota.fantasia.ejercito.enums.Raza;
 import iota.fantasia.ejercito.unidad.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 class UnidadFactoryTest {
 

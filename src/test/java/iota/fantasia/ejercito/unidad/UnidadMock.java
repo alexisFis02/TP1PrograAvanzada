@@ -8,7 +8,7 @@ public class UnidadMock extends Unidad {
         super(salud, salud, 0, 0, 0);
     }
 
-    public UnidadMock(int salud, Bando bando){
+    public UnidadMock(int salud, Bando bando) {
         super(salud, salud, 0, 0, 0, bando);
     }
 

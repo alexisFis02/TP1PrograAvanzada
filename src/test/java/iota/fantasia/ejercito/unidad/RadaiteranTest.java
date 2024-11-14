@@ -3,7 +3,8 @@ package iota.fantasia.ejercito.unidad;
 import iota.fantasia.ejercito.Atacable;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class RadaiteranTest {
 

@@ -5,9 +5,9 @@ import iota.fantasia.ejercito.enums.Bando;
 
 public abstract class Unidad extends Atacable {
 
+    protected final int danioBase;
     protected int salud;
     protected int saludMaxima;
-    protected final int danioBase;
     protected int rangoAtaqueMin;
     protected int rangoAtaqueMax;
 

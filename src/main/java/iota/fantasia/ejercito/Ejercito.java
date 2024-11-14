@@ -53,7 +53,7 @@ public class Ejercito extends Atacable {
     @Override
     public void atacar(Atacable enemigo) {
         Unidad atacante = getPrimeroEnAtacar();
-        if (atacante != null){
+        if (atacante != null) {
             atacante.atacar(enemigo);
         }
     }
@@ -87,7 +87,7 @@ public class Ejercito extends Atacable {
     @Override
     public void recibirAtaque(int danio) {
         var defensor = getPrimeroEnDefender();
-        if (defensor != null){
+        if (defensor != null) {
             defensor.recibirAtaque(danio);
             if (!defensor.estaVivo()) {
                 setUnidadDesmaya(defensor);
@@ -122,26 +122,26 @@ public class Ejercito extends Atacable {
 
     public Unidad getPrimeroEnDefender() {
         return !unidadesAliadas.isEmpty() ? unidadesAliadas.peek() :
-                !unidadesPropias.isEmpty() ? unidadesPropias.peek():
-                ultimaHerida
+                !unidadesPropias.isEmpty() ? unidadesPropias.peek() :
+                        ultimaHerida
                 ;
     }
 
     private Unidad sacarPrimeroEnDefender() {
         return !unidadesAliadas.isEmpty() ? unidadesAliadas.poll() :
-                !unidadesPropias.isEmpty() ? unidadesPropias.poll():
-                ultimaHerida
+                !unidadesPropias.isEmpty() ? unidadesPropias.poll() :
+                        ultimaHerida
                 ;
     }
 
     public Unidad getPrimeroEnAtacar() {
         return !unidadesAliadas.isEmpty() ? unidadesAliadas.peek() :
-                !unidadesPropias.isEmpty() ? unidadesPropias.peek():
-                ultimaHerida
+                !unidadesPropias.isEmpty() ? unidadesPropias.peek() :
+                        ultimaHerida
                 ;
     }
 
-    private void setUnidadDesmaya(Unidad desmaya){
+    private void setUnidadDesmaya(Unidad desmaya) {
         switch (desmaya.bando) {
             case PROPIO, ENEMIGO -> unidadesPropias.poll();
             case ALIADO -> unidadesAliadas.poll();
@@ -150,19 +150,19 @@ public class Ejercito extends Atacable {
 
     public int getSalud() {
         int saludTotal = 0;
-        
+
         for (Unidad unidad : unidadesPropias) {
             saludTotal += unidad.getSalud();
         }
-        
+
         for (Unidad unidad : unidadesAliadas) {
             saludTotal += unidad.getSalud();
         }
-        
+
         if (ultimaHerida != null && ultimaHerida.estaVivo()) {
             saludTotal += ultimaHerida.getSalud();
         }
-        
+
         return saludTotal;
     }
 }

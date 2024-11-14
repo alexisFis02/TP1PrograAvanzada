@@ -8,14 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class EjercitoTest {
-    
+
     private Ejercito ejercito;
-    
+
     @BeforeEach
     void setUp() {
         ArrayList<Unidad> unidades = new ArrayList<Unidad>();
@@ -76,7 +75,7 @@ class EjercitoTest {
     void atacar_EjercitoAtacaAOtroEjercito_CausaDanio() {
         var ejercitoEnemigo = new Ejercito(1, Raza.WRIVES, Bando.ENEMIGO);
         var unidadesInicialesEnemigo = ejercitoEnemigo.contarUnidadesFinales();
-        
+
         ejercito.atacar(ejercitoEnemigo);
 
         int saludEsperada = ejercitoEnemigo.getPrimeroEnDefender().getSalud() - ejercito.getPrimeroEnAtacar().getDanioBase();
@@ -90,13 +89,13 @@ class EjercitoTest {
     void descansar_UnidadesDescansanCorrectamente() {
         ejercito.recibirAtaque(50);
         ejercito.descansar();
-        
+
         var ejercitoComparacion = new Ejercito(1, Raza.NORTAICHIAN, Bando.PROPIO);
-        
+
         var danio = 30;
         ejercito.recibirAtaque(danio);
         ejercitoComparacion.recibirAtaque(danio);
-        
+
         assertTrue(ejercito.estaVivo());
         assertTrue(ejercitoComparacion.estaVivo());
     }
@@ -124,7 +123,7 @@ class EjercitoTest {
     void contarUnidadesFinales_RetornaCantidadCorrecta() {
         ejercito.agregarUnidadesPropias(2, Raza.NORTAICHIAN);
         ejercito.agregarUnidadesAliadas(3, Raza.WRIVES);
-        
+
         assertEquals(6, ejercito.contarUnidadesFinales()); // 6 por que ya tiene la unidad mock
     }
 } 

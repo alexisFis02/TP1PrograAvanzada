@@ -10,20 +10,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BatallaTest {
 
     @Test
     void ejercitoAliadoGanaLaBatalla() {
         var unidadesAliadas = new ArrayList<Unidad>(Arrays.asList(
-            new UnidadMock(100, Bando.PROPIO),
-            new UnidadMock(100, Bando.PROPIO)
+                new UnidadMock(100, Bando.PROPIO),
+                new UnidadMock(100, Bando.PROPIO)
         ));
         var unidadesEnemigas = new ArrayList<Unidad>(List.of(
                 new UnidadMock(50, Bando.ENEMIGO)
         ));
-        
+
         var ejercitoAliado = new Ejercito(unidadesAliadas);
         var ejercitoEnemigo = new Ejercito(unidadesEnemigas);
         var batalla = new Batalla(ejercitoAliado, ejercitoEnemigo);
@@ -41,10 +42,10 @@ class BatallaTest {
                 new UnidadMock(50, Bando.PROPIO)
         ));
         var unidadesEnemigas = new ArrayList<Unidad>(Arrays.asList(
-            new UnidadMock(100, Bando.ENEMIGO),
-            new UnidadMock(100, Bando.ENEMIGO)
+                new UnidadMock(100, Bando.ENEMIGO),
+                new UnidadMock(100, Bando.ENEMIGO)
         ));
-        
+
         var ejercitoAliado = new Ejercito(unidadesAliadas);
         var ejercitoEnemigo = new Ejercito(unidadesEnemigas);
         var batalla = new Batalla(ejercitoAliado, ejercitoEnemigo);
@@ -59,14 +60,14 @@ class BatallaTest {
     @Test
     void batallaConEjercitosIguales() {
         var unidadesAliadas = new ArrayList<Unidad>(Arrays.asList(
-            new UnidadMock(100, Bando.PROPIO),
-            new UnidadMock(100, Bando.PROPIO)
+                new UnidadMock(100, Bando.PROPIO),
+                new UnidadMock(100, Bando.PROPIO)
         ));
         var unidadesEnemigas = new ArrayList<Unidad>(Arrays.asList(
-            new UnidadMock(100, Bando.ENEMIGO),
-            new UnidadMock(100, Bando.ENEMIGO)
+                new UnidadMock(100, Bando.ENEMIGO),
+                new UnidadMock(100, Bando.ENEMIGO)
         ));
-        
+
         var ejercitoAliado = new Ejercito(unidadesAliadas);
         var ejercitoEnemigo = new Ejercito(unidadesEnemigas);
         var batalla = new Batalla(ejercitoAliado, ejercitoEnemigo);
