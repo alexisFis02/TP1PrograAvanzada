@@ -2,7 +2,9 @@ package iota.fantasia.ejercito.unidad;
 
 import iota.fantasia.ejercito.Atacable;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class WrivesTest {
 
@@ -10,7 +12,7 @@ class WrivesTest {
     void testAtacar() {
         Wrives wrives = new Wrives();
         Atacable enemigo = new UnidadMock(100);
-        
+
         wrives.atacar(enemigo); // 100 - 113 = 0
         assertEquals(0, enemigo.getSalud()); // 113
     }
@@ -27,18 +29,16 @@ class WrivesTest {
     void testAtacarConDobleDanio() {
         Wrives wrives = new Wrives();
         Atacable enemigo = new UnidadMock(500);
-        
+
         wrives.atacar(enemigo); // 100 - 113 = 0
         wrives.atacar(enemigo); // 100 - 113 = 0
         wrives.atacar(enemigo); // con doble danio
-        assertEquals(500-113-113-(2*113), enemigo.getSalud());
-
-        // Wrives no puede atacar de nuevo porque ha sido atacado
+        assertEquals(500 - 113 - 113 - (2 * 113), enemigo.getSalud());
 
     }
 
     @Test
-    void testDescansarYAtacar(){
+    void testDescansarYAtacar() {
         Wrives wrives = new Wrives();
         Atacable enemigo = new UnidadMock(500);
         wrives.descansar();

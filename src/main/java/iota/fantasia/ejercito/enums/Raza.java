@@ -4,5 +4,6 @@ public enum Raza {
     WRIVES,
     RERALOPES,
     RADAITERAN,
-    NORTAICHIAN
+    NORTAICHIAN,
+    DESCONOCIDA
 } 

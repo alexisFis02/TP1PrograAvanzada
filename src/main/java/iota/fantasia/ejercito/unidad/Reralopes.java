@@ -15,7 +15,7 @@ public class Reralopes extends Unidad {
     private boolean concentrado = false;
 
     public Reralopes() {
-        super(53, 53, 27, 5, 46,null);
+        super(53, 53, 27, 5, 46, null);
     }
 
     public Reralopes(Bando bando) {
@@ -27,7 +27,7 @@ public class Reralopes extends Unidad {
         contadorAtaques++;
 
         // Erra 2 de cada 4 ataques
-        if (! (contadorAtaques % 2 == 0)) {
+        if (!(contadorAtaques % 2 == 0)) {
             enemigo.recibirAtaque(getDanioAlAtacar());
         }
 

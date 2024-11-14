@@ -1,4 +1,5 @@
 package iota.fantasia.ejercito.unidad;
+
 import iota.fantasia.ejercito.Atacable;
 import iota.fantasia.ejercito.enums.Bando;
 
@@ -11,7 +12,7 @@ public class Radaiteran extends Unidad {
     private int contadorAtaques = 0;
 
     public Radaiteran() {
-        super(36, 36, 56, 17, 41,Bando.NEUTRAL);
+        super(36, 36, 56, 17, 41, Bando.NEUTRAL);
     }
 
     public Radaiteran(Bando bando) {

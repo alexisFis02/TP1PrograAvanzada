@@ -57,14 +57,13 @@ public class DijkstraAlgoritmo {
             }
         }
 
-        List<Poblado> camino = reconstruirCamino(previos, origen, destino, mapa);
+        List<Poblado> camino = reconstruirCamino(previos, destino, mapa);
         int tiempoTotal = tiempos.get(destino);
 
         return new ResultadoCamino(camino, tiempoTotal);
     }
 
     private static List<Poblado> reconstruirCamino(Map<Integer, Integer> previos,
-                                                   Poblado origen,
                                                    Poblado destino,
                                                    Mapa mapa) {
         List<Poblado> camino = new ArrayList<>();
@@ -77,7 +76,7 @@ public class DijkstraAlgoritmo {
 
         // Reconstruir el camino desde el destino hacia el origen
         while (actual != null) {
-            camino.add(0, actual);
+            camino.addFirst(actual);
             actual = mapa.getPoblados().get(previos.get(actual.getId()));
         }
 

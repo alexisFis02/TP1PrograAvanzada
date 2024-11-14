@@ -7,7 +7,7 @@ public abstract class Unidad extends Atacable {
 
     protected int salud;
     protected int saludMaxima;
-    protected int danioBase;
+    protected final int danioBase;
     protected int rangoAtaqueMin;
     protected int rangoAtaqueMax;
 
@@ -40,29 +40,14 @@ public abstract class Unidad extends Atacable {
         return salud > 0;
     }
 
-    /**
-     * Obtiene la salud actual de la unidad
-     *
-     * @return salud actual
-     */
     public int getSalud() {
         return salud;
     }
 
-    /**
-     * Obtiene la salud máxima de la unidad
-     *
-     * @return salud máxima
-     */
     public int getSaludMaxima() {
         return saludMaxima;
     }
 
-    /**
-     * Obtiene el daño base que puede realizar la unidad
-     *
-     * @return daño base
-     */
     public int getDanioBase() {
         return danioBase;
     }

@@ -15,7 +15,7 @@ public class Wrives extends Unidad {
     private int contadorAtaques = 0;
 
     public Wrives() {
-        super(108, 108, 113, 14, 28,null);
+        super(108, 108, 113, 14, 28, null);
     }
 
     public Wrives(Bando bando) {
