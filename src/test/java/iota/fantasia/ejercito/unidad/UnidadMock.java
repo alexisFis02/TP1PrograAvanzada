@@ -14,6 +14,7 @@ public class UnidadMock extends Unidad {
 
     @Override
     public void atacar(Atacable enemigo) {
+        enemigo.recibirAtaque(10);
     }
 
     @Override
