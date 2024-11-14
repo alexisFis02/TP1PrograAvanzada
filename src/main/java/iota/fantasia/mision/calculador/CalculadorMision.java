@@ -13,7 +13,6 @@ import java.util.List;
 public class CalculadorMision {
 	private static final int KILOMETROS_POR_DIA = 10;
 	private final List<Poblado> rutaOptima;
-	private final Ejercito ejercito;
 	private final Ejercito ejercitoFinal;
 	private final Poblado origen;
 	private final List<Poblado> caminoAlcanzable;
@@ -23,7 +22,6 @@ public class CalculadorMision {
 	public CalculadorMision(Mapa mapa, int origen, int destino) {
 		this.origen = mapa.obtenerPoblado(origen);
 		Poblado destino1 = mapa.obtenerPoblado(destino);
-		this.ejercito = new Ejercito(this.origen.getHabitantes(), this.origen.getRaza(), Bando.PROPIO);
 		ResultadoCamino resultado = DijkstraAlgoritmo.encontrarCaminoMasCorto(mapa, this.origen, destino1);
 		this.rutaOptima = resultado.camino();
 		this.tiempoTotal = (int) Math.ceil(resultado.distanciaTotal() / (double) KILOMETROS_POR_DIA);
@@ -33,13 +31,10 @@ public class CalculadorMision {
 	}
 
 	public boolean esMisionFactible() {
-		// return ejercitoFinal != null && ejercitoFinal.estaVivo();
 		return ejercitoFinal.estaVivo();
 	}
 
 	public int calcularGuerrerosFinales() {
-		if (!ejercitoFinal.estaVivo())
-			return 0;
 		return ejercitoFinal.contarUnidadesFinales();
 	}
 
@@ -48,7 +43,6 @@ public class CalculadorMision {
 	}
 
 	private Ejercito simularRuta() {
-		//Ejercito ejercitoActual = new Ejercito(new ArrayList<>(ejercito.getUnidades()));
 		Ejercito ejercitoActual = new Ejercito(this.origen.getHabitantes(), this.origen.getRaza(), Bando.PROPIO);
 		caminoAlcanzable.clear();
 		caminoAlcanzable.add(origen);
@@ -68,7 +62,7 @@ public class CalculadorMision {
 			case ALIADO:
 				ejercitoActual.descansar();
 				ejercitoActual.agregarUnidades(poblado.getHabitantes() / 2, poblado.getRaza(), Bando.ALIADO);
-				logAcciones.append("Descansando y reclutando en poblado aliado: " + poblado).append("%)\n");
+				logAcciones.append("Descansando y reclutando en poblado aliado: ").append(poblado).append("%)\n");
 				break;
 
 			case ENEMIGO:
@@ -83,6 +77,7 @@ public class CalculadorMision {
 					if (!ejercitoEnemigo.estaVivo()) {
 						batallaEnCurso = false;
 						logAcciones.append("Victoria!\n");
+						ejercitoActual.actualizarUltimoHerido();
 						continue;
 					}
 

@@ -55,10 +55,9 @@ public class Ejercito extends Atacable {
 
 	public void agregarUnidades(int cantidad, Raza raza, Bando bando) {
 		switch (bando) {
-		case PROPIO -> agregarUnidadesPropias(cantidad, raza);
+		case PROPIO, ENEMIGO -> agregarUnidadesPropias(cantidad, raza);
 		case ALIADO -> agregarUnidadesAliadas(cantidad, raza);
-		case ENEMIGO -> agregarUnidadesPropias(cantidad, raza);
-		}
+        }
 	}
 
 	@Override
@@ -97,6 +96,7 @@ public class Ejercito extends Atacable {
 				unidadesAliadas.add(unidadesAliadas.poll());
 			}
 		}
+
 		ultimaHerida.descansar();
 	}
 
@@ -115,19 +115,26 @@ public class Ejercito extends Atacable {
 		}
 	}
 
+	public void actualizarUltimoHerido(){
+		Unidad ultimoEnRecibirDanio;
+		if (!unidadesAliadas.isEmpty()) {
+			ultimoEnRecibirDanio = unidadesAliadas.peek();
+		} else if (!unidadesPropias.isEmpty()) {
+			ultimoEnRecibirDanio = unidadesPropias.peek();
+		} else {
+			ultimoEnRecibirDanio = ultimaHerida;
+		}
+
+		// reincorporo al ejercito
+		if(ultimaHerida.bando == Bando.PROPIO){
+			unidadesPropias.add(ultimaHerida);
+		}else if(ultimaHerida.bando == Bando.ALIADO){
+			unidadesAliadas.add(ultimaHerida);
+		}
+		ultimaHerida = ultimoEnRecibirDanio;
+	}
+
 	public int contarUnidadesFinales() {
-		int contador = 0;
-		while(!unidadesAliadas.isEmpty()) {
-			unidadesAliadas.poll();
-			contador++;
-		}
-		while(!unidadesPropias.isEmpty()) {
-			unidadesPropias.poll();
-			contador ++;
-		}
-		if(ultimaHerida != null && ultimaHerida.estaVivo()) {
-			contador++;
-		}
-		return contador;
+		return unidadesAliadas.size() + unidadesPropias.size() + (ultimaHerida != null && ultimaHerida.estaVivo() ? 1 : 0);
 	}
 }
