@@ -57,7 +57,7 @@ public class Ejercito extends Atacable {
 		switch (bando) {
 		case PROPIO, ENEMIGO -> agregarUnidadesPropias(cantidad, raza);
 		case ALIADO -> agregarUnidadesAliadas(cantidad, raza);
-        }
+		}
 	}
 
 	@Override
@@ -115,26 +115,29 @@ public class Ejercito extends Atacable {
 		}
 	}
 
-	public void actualizarUltimoHerido(){
+	public void actualizarUltimoHerido() {
 		Unidad ultimoEnRecibirDanio;
 		if (!unidadesAliadas.isEmpty()) {
-			ultimoEnRecibirDanio = unidadesAliadas.peek();
+			ultimoEnRecibirDanio = unidadesAliadas.poll();
 		} else if (!unidadesPropias.isEmpty()) {
-			ultimoEnRecibirDanio = unidadesPropias.peek();
+			ultimoEnRecibirDanio = unidadesPropias.poll();
 		} else {
 			ultimoEnRecibirDanio = ultimaHerida;
 		}
 
 		// reincorporo al ejercito
-		if(ultimaHerida.bando == Bando.PROPIO){
-			unidadesPropias.add(ultimaHerida);
-		}else if(ultimaHerida.bando == Bando.ALIADO){
-			unidadesAliadas.add(ultimaHerida);
+		if (ultimaHerida != null) {
+			if (ultimaHerida.bando == Bando.PROPIO) {
+				unidadesPropias.add(ultimaHerida);
+			} else if (ultimaHerida.bando == Bando.ALIADO) {
+				unidadesAliadas.add(ultimaHerida);
+			}
 		}
 		ultimaHerida = ultimoEnRecibirDanio;
 	}
 
 	public int contarUnidadesFinales() {
-		return unidadesAliadas.size() + unidadesPropias.size() + (ultimaHerida != null && ultimaHerida.estaVivo() ? 1 : 0);
+		return unidadesAliadas.size() + unidadesPropias.size()
+				+ (ultimaHerida != null && ultimaHerida.estaVivo() ? 1 : 0);
 	}
 }
