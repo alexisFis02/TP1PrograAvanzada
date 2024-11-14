@@ -6,6 +6,7 @@ import iota.fantasia.mapa.Mapa;
 import iota.fantasia.mapa.Poblado;
 import iota.fantasia.mapa.algoritmos.DijkstraAlgoritmo.ResultadoCamino;
 import iota.fantasia.mapa.algoritmos.DijkstraAlgoritmo;
+import iota.fantasia.batalla.Batalla;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class CalculadorMision {
 		caminoAlcanzable.add(origen);
 		logAcciones.setLength(0);
 		logAcciones.append("Iniciando mision desde poblado ").append(origen.getId()).append(" con ")
-				.append(this.origen.getHabitantes()).append(" guerreros. %)\\n");
+				.append(this.origen.getHabitantes()).append(" guerreros. \n");
 		
 		for (int i = 1; i < rutaOptima.size(); i++) {
 			Poblado poblado = rutaOptima.get(i);
@@ -67,26 +68,15 @@ public class CalculadorMision {
 
 			case ENEMIGO:
 				Ejercito ejercitoEnemigo = poblado.generarEjercito();
-				logAcciones.append("¡Batalla! Enemigos: ").append(poblado.getRaza()).append("%)\n");
+				logAcciones.append("¡Batalla! Enemigos: ").append(poblado.getRaza()).append("\n");
 
-				boolean batallaEnCurso = true;
-
-				while (batallaEnCurso) {
-					ejercitoActual.atacar(ejercitoEnemigo);
-
-					if (!ejercitoEnemigo.estaVivo()) {
-						batallaEnCurso = false;
-						logAcciones.append("Victoria!\n");
-						ejercitoActual.actualizarUltimoHerido();
-						continue;
-					}
-
-					ejercitoEnemigo.atacar(ejercitoActual);
-					if (!ejercitoActual.estaVivo()) {
-						logAcciones.append("Derrota! Nuestro ejercito ha sido destruido\n");
-						caminoAlcanzable.removeLast();
-						return null;
-					}
+				Batalla batalla = new Batalla(ejercitoActual, ejercitoEnemigo);
+				if(batalla.simularBatalla()) {
+					ejercitoActual.actualizarUltimoHerido();
+					logAcciones.append("Victoria!\n");
+				}else {
+					logAcciones.append("Derrota! Nuestro ejercito ha sido destruido\n");
+					caminoAlcanzable.removeLast();
 				}
 
 				break;

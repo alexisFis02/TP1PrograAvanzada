@@ -125,6 +125,7 @@ public class Ejercito extends Atacable {
 	}
 
 	public int contarUnidadesFinales() {
-		return unidadesAliadas.size() + unidadesPropias.size() + (ultimaHerida != null && ultimaHerida.estaVivo() ? 1 : 0);
+		return unidadesAliadas.size() + unidadesPropias.size()
+				+ (ultimaHerida != null && ultimaHerida.estaVivo() ? 1 : 0);
 	}
 }
