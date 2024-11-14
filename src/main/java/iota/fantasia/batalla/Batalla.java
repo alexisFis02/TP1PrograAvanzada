@@ -26,15 +26,12 @@ public class Batalla {
 			}
 			
 			ejercitoEnemigo.atacar(ejercitoAliado);
-			System.out.println("Despues de atacar");
 			if (!ejercitoAliado.estaVivo()) {
-				System.out.println("Entra aca");
 				
 				batallaEnCurso = false;
 				resultado = false;
 			}
 		}
-		System.out.println("Despues de pelear");
 		return resultado;
     }
 }
