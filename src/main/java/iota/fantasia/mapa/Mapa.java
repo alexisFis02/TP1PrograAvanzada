@@ -9,15 +9,34 @@ import java.util.Map;
 import java.util.Set;
 
 public class Mapa {
+    private static Mapa instance;
     private final Map<Integer, Poblado> poblados;
 
-    public Mapa(Map<Integer, Poblado> poblados) {
+    private Mapa(Map<Integer, Poblado> poblados) {
         this.poblados = poblados;
     }
 
-    public Mapa(DatosArchivo datosArchivo) {
+    private Mapa(DatosArchivo datosArchivo) {
         this.poblados = new HashMap<>();
         armarMapaPoblados(datosArchivo.poblados(), datosArchivo.caminos());
+    }
+
+    public static Mapa getInstance(DatosArchivo datosArchivo) {
+        if (instance == null) {
+            instance = new Mapa(datosArchivo);
+        }
+        return instance;
+    }
+
+    public static Mapa getInstance(Map<Integer, Poblado> poblados) {
+        if (instance == null) {
+            instance = new Mapa(poblados);
+        }
+        return instance;
+    }
+
+    public static void reset() {
+        instance = null;
     }
 
     private void armarMapaPoblados(Set<Poblado> poblados, List<Camino> caminos) {

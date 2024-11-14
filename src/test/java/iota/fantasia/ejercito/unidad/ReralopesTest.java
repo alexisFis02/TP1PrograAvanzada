@@ -2,6 +2,9 @@ package iota.fantasia.ejercito.unidad;
 
 import iota.fantasia.ejercito.Atacable;
 import org.junit.jupiter.api.Test;
+
+import java.util.prefs.PreferenceChangeListener;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReralopesTest {
@@ -107,5 +110,13 @@ class ReralopesTest {
         assertEquals(3, reralopes.getAtaquesPotenciados());
         assertEquals(53, reralopes.getSalud());
         assertEquals(53, reralopes.getSaludMaxima());
+    }
+
+    @Test
+    void testRecibirAtaqueMortalYMorir() {
+        var reralopes = new Reralopes();
+        reralopes.recibirAtaque(1000000000);
+        assertEquals(0, reralopes.getSalud());
+        assertFalse(reralopes.estaVivo());
     }
 }

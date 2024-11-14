@@ -63,4 +63,12 @@ class WrivesTest {
         assertEquals(58, wrives.getSalud()); // 8 + 50 = 58
         assertEquals(158, wrives.getSaludMaxima()); // Salud máxima aumentada
     }
+
+    @Test
+    void testRecibirAtaqueMortalYMorir() {
+        var wrives = new Wrives();
+        wrives.recibirAtaque(1000000000);
+        assertEquals(0, wrives.getSalud());
+        assertFalse(wrives.estaVivo());
+    }
 } 

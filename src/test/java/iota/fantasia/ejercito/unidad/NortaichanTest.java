@@ -111,4 +111,12 @@ class NortaichanTest {
         * u <- complejidad final
         * */
     }
+
+    @Test
+    void testRecibirAtaqueMortalYMorir() {
+        var nortaichan = new Nortaichan();
+        nortaichan.recibirAtaque(1000000000);
+        assertEquals(0, nortaichan.getSalud());
+        assertFalse(nortaichan.estaVivo());
+    }
 } 

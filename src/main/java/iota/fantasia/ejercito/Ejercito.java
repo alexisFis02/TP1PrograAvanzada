@@ -2,18 +2,11 @@ package iota.fantasia.ejercito;
 
 import iota.fantasia.ejercito.enums.Raza;
 import iota.fantasia.ejercito.factory.UnidadFactory;
-import iota.fantasia.ejercito.unidad.Nortaichan;
-import iota.fantasia.ejercito.unidad.Radaiteran;
-import iota.fantasia.ejercito.unidad.Reralopes;
 import iota.fantasia.ejercito.unidad.Unidad;
-import iota.fantasia.ejercito.unidad.Wrives;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.ArrayList;
 
 public class Ejercito extends Atacable {
 
@@ -35,10 +28,6 @@ public class Ejercito extends Atacable {
 		this.unidadesAliadas = new LinkedList<>();
 		this.ultimaHerida = null;
 		agregarUnidades(cantidad, raza, bando);
-	}
-
-	public void agregarUnidad(Unidad unidad) {
-		unidadesPropias.add(unidad);
 	}
 
 	public void agregarUnidadesPropias(int cantidad, Raza raza) {
@@ -77,40 +66,38 @@ public class Ejercito extends Atacable {
 	}
 
 	public void descansar() {
-		int hashPrimero;
-		if (!unidadesPropias.isEmpty()) {
-			hashPrimero = unidadesPropias.peek().hashCode();
-			unidadesPropias.peek().descansar();
-			unidadesPropias.add(unidadesPropias.poll());
-			while (hashPrimero != unidadesPropias.peek().hashCode()) {
-				unidadesPropias.peek().descansar();
-				unidadesPropias.add(unidadesPropias.poll());
-			}
+		descansarUnidades(unidadesPropias);
+		descansarUnidades(unidadesAliadas);
+		if (ultimaHerida != null) {
+			ultimaHerida.descansar();
 		}
-		if (!unidadesAliadas.isEmpty()) {
-			hashPrimero = unidadesAliadas.peek().hashCode();
-			unidadesAliadas.peek().descansar();
-			unidadesAliadas.add(unidadesAliadas.poll());
-			while (hashPrimero != unidadesAliadas.peek().hashCode()) {
-				unidadesAliadas.peek().descansar();
-				unidadesAliadas.add(unidadesAliadas.poll());
-			}
-		}
+	}
 
-		ultimaHerida.descansar();
+	private void descansarUnidades(Queue<Unidad> unidades) {
+		if (unidades.isEmpty()) return;
+		
+		int size = unidades.size();
+		for (int i = 0; i < size; i++) {
+			Unidad unidad = unidades.poll();
+            if (unidad != null) {
+                unidad.descansar();
+				unidades.add(unidad);
+            }
+		}
 	}
 
 	@Override
 	public void recibirAtaque(int danio) {
-		if (!unidadesAliadas.isEmpty()) {
-			unidadesAliadas.peek().recibirAtaque(danio);
-			if (!unidadesAliadas.peek().estaVivo())
-				unidadesAliadas.poll();
-		} else if (!unidadesPropias.isEmpty()) {
-			unidadesPropias.peek().recibirAtaque(danio);
-			if (!unidadesPropias.peek().estaVivo())
-				unidadesPropias.poll();
-		} else {
+		var unidadesObjetivo = !unidadesAliadas.isEmpty() ? unidadesAliadas : unidadesPropias;
+		
+		if (!unidadesObjetivo.isEmpty()) {
+			var unidadActual = unidadesObjetivo.peek();
+			unidadActual.recibirAtaque(danio);
+			
+			if (!unidadActual.estaVivo()) {
+				unidadesObjetivo.poll();
+			}
+		} else if (ultimaHerida != null) {
 			ultimaHerida.recibirAtaque(danio);
 		}
 	}
@@ -118,19 +105,19 @@ public class Ejercito extends Atacable {
 	public void actualizarUltimoHerido(){
 		Unidad ultimoEnRecibirDanio;
 		if (!unidadesAliadas.isEmpty()) {
-			ultimoEnRecibirDanio = unidadesAliadas.peek();
+			ultimoEnRecibirDanio = unidadesAliadas.poll();
 		} else if (!unidadesPropias.isEmpty()) {
-			ultimoEnRecibirDanio = unidadesPropias.peek();
+			ultimoEnRecibirDanio = unidadesPropias.poll();
 		} else {
 			ultimoEnRecibirDanio = ultimaHerida;
 		}
 
-		// reincorporo al ejercito
+		// reincorporo al ejercito la ultima unidad herida de la batalla anterior
 		if(ultimaHerida != null && ultimaHerida.estaVivo()){
-			if(ultimaHerida.bando == Bando.PROPIO){
-				unidadesPropias.add(ultimaHerida);
-			}else if(ultimaHerida.bando == Bando.ALIADO){
-				unidadesAliadas.add(ultimaHerida);
+			switch (ultimaHerida.bando) {
+				case PROPIO -> unidadesPropias.add(ultimaHerida);
+				case ALIADO -> unidadesAliadas.add(ultimaHerida);
+				case ENEMIGO -> {}
 			}
 		}
 

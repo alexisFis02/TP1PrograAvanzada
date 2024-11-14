@@ -20,7 +20,7 @@ public abstract class Unidad extends Atacable {
 
     public void recibirAtaque(int danio) {
         salud -= danio;
-        if (salud < 0) {
+        if (salud <= 0) {
             salud = 0;
         }
     }

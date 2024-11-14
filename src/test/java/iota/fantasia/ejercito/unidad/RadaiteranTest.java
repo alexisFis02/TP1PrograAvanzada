@@ -61,4 +61,12 @@ class RadaiteranTest {
         radaiteran.descansar();
         assertEquals(radaiteran.getSaludMaxima()-10, radaiteran.getSalud());
     }
+
+    @Test
+    void testRecibirAtaqueMortalYMorir() {
+        var radaiteran = new Radaiteran();
+        radaiteran.recibirAtaque(1000000000);
+        assertEquals(0, radaiteran.getSalud());
+        assertFalse(radaiteran.estaVivo());
+    }
 }

@@ -40,7 +40,7 @@ class DijkstraAlgoritmoTest {
         poblados.put(3, poblado3);
         poblados.put(4, poblado4);
         
-        mapa = new Mapa(poblados);
+        mapa = Mapa.getInstance(poblados);
     }
 
     @Test

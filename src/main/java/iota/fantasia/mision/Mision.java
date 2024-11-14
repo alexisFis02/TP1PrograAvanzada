@@ -11,7 +11,7 @@ public class Mision {
 	private final CalculadorMision calculador;
 
 	public Mision(DatosArchivo conf) {
-		this.mapa = new Mapa(conf);
+		this.mapa = Mapa.getInstance(conf);
 		this.inicio = conf.inicio();
 		this.destino = conf.destino();
 		calculador = new CalculadorMision(mapa, inicio, conf.destino());
