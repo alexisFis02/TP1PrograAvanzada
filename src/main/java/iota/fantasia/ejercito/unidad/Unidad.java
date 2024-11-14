@@ -3,12 +3,17 @@ package iota.fantasia.ejercito.unidad;
 import iota.fantasia.ejercito.Atacable;
 
 public abstract class Unidad extends Atacable implements Comparable<Unidad> {
+
     protected int salud;
     protected int saludMaxima;
     protected int danioBase;
     protected int rangoAtaqueMin;
     protected int rangoAtaqueMax;
 
+    public Unidad(){
+    	
+    }
+    
     public Unidad(int salud, int saludMaxima, int danioBase, int rangoAtaqueMin, int rangoAtaqueMax) {
         this.salud = salud;
         this.saludMaxima = saludMaxima;
@@ -16,10 +21,6 @@ public abstract class Unidad extends Atacable implements Comparable<Unidad> {
         this.rangoAtaqueMin = rangoAtaqueMin;
         this.rangoAtaqueMax = rangoAtaqueMax;
     }
-
-    public abstract void atacar(Unidad enemigo);
-
-    public abstract void descansar();
 
     public void recibirAtaque(int danio) {
         salud -= danio;

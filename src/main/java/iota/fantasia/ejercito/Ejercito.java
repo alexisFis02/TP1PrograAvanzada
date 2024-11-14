@@ -2,98 +2,139 @@ package iota.fantasia.ejercito;
 
 import iota.fantasia.ejercito.enums.Raza;
 import iota.fantasia.ejercito.factory.UnidadFactory;
+import iota.fantasia.ejercito.unidad.Nortaichan;
+import iota.fantasia.ejercito.unidad.Radaiteran;
+import iota.fantasia.ejercito.unidad.Reralopes;
 import iota.fantasia.ejercito.unidad.Unidad;
+import iota.fantasia.ejercito.unidad.Wrives;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.ArrayList;
 
 public class Ejercito extends Atacable {
-    private final List<Unidad> unidades;
 
-    public Ejercito(List<Unidad> unidades) {
-        this.unidades = new ArrayList<>(unidades);
-    }
+	private final Queue<Unidad> unidadesPropias;
+	private final Queue<Unidad> unidadesAliadas;
+	private Unidad ultimaHerida;
 
-    public Ejercito(int cantidad, Raza raza) {
-        this.unidades = new ArrayList<>();
-        agregarUnidades(cantidad, raza);
-    }
+	public Ejercito(ArrayList<Unidad> unidades) {
+		if (unidades.isEmpty()) {
+			throw new IllegalArgumentException("No se puede crear un ejercito sin unidades.");
+		}
+		this.unidadesPropias = new LinkedList<>(unidades);
+		this.unidadesAliadas = new LinkedList<>();
+		this.ultimaHerida = null;
+	}
 
-    public void agregarUnidad(Unidad unidad) {
-        unidades.add(unidad);
-    }
+	public Ejercito(int cantidad, Raza raza, Bando bando) {
+		this.unidadesPropias = new LinkedList<>();
+		this.unidadesAliadas = new LinkedList<>();
+		this.ultimaHerida = null;
+		agregarUnidades(cantidad, raza, bando);
+	}
 
-    public void agregarUnidades(int cantidad, Raza raza) {
-        for (int i = 0; i < cantidad; i++) {
-            unidades.add(UnidadFactory.crearUnidad(raza));
+	public void agregarUnidad(Unidad unidad) {
+		unidadesPropias.add(unidad);
+	}
+
+	public void agregarUnidadesPropias(int cantidad, Raza raza) {
+		for (int i = 0; i < cantidad; i++) {
+			unidadesPropias.add(UnidadFactory.crearUnidad(raza));
+		}
+	}
+
+	public void agregarUnidadesAliadas(int cantidad, Raza raza) {
+		for (int i = 0; i < cantidad; i++) {
+			unidadesAliadas.add(UnidadFactory.crearUnidad(raza));
+		}
+	}
+
+	public void agregarUnidades(int cantidad, Raza raza, Bando bando) {
+		switch (bando) {
+		case PROPIO, ENEMIGO -> agregarUnidadesPropias(cantidad, raza);
+		case ALIADO -> agregarUnidadesAliadas(cantidad, raza);
         }
-    }
+	}
 
-    public void atacar(Ejercito enemigo) {
-        if (!tieneUnidadesVivas() || !enemigo.tieneUnidadesVivas()) {
-            return;
-        }
+	@Override
+	public void atacar(Atacable enemigo) {
+		if (!unidadesAliadas.isEmpty()) {
+			unidadesAliadas.peek().atacar(enemigo);
+		} else if (!unidadesPropias.isEmpty()) {
+			unidadesPropias.peek().atacar(enemigo);
+		} else {
+			ultimaHerida.atacar(enemigo);
+		}
+	}
 
-        // Obtener la primera unidad viva de cada ejército
-        Unidad atacante = unidades.stream()
-                .filter(Unidad::estaVivo)
-                .findFirst()
-                .orElse(null);
-        
-        Unidad defensor = enemigo.unidades.stream()
-                .filter(Unidad::estaVivo)
-                .findFirst()
-                .orElse(null);
+	public boolean estaVivo() {
+		return (!unidadesPropias.isEmpty() || !unidadesAliadas.isEmpty())
+				|| (ultimaHerida != null && ultimaHerida.estaVivo());
+	}
 
-        if (atacante != null && defensor != null) {
-            atacante.atacar(defensor);
-        }
-    }
+	public void descansar() {
+		int hashPrimero;
+		if (!unidadesPropias.isEmpty()) {
+			hashPrimero = unidadesPropias.peek().hashCode();
+			unidadesPropias.peek().descansar();
+			unidadesPropias.add(unidadesPropias.poll());
+			while (hashPrimero != unidadesPropias.peek().hashCode()) {
+				unidadesPropias.peek().descansar();
+				unidadesPropias.add(unidadesPropias.poll());
+			}
+		}
+		if (!unidadesAliadas.isEmpty()) {
+			hashPrimero = unidadesAliadas.peek().hashCode();
+			unidadesAliadas.peek().descansar();
+			unidadesAliadas.add(unidadesAliadas.poll());
+			while (hashPrimero != unidadesAliadas.peek().hashCode()) {
+				unidadesAliadas.peek().descansar();
+				unidadesAliadas.add(unidadesAliadas.poll());
+			}
+		}
 
-    public boolean tieneUnidadesVivas() {
-        return unidades.stream().anyMatch(Unidad::estaVivo);
-    }
+		ultimaHerida.descansar();
+	}
 
-    public void descansar() {
-        unidades.stream()
-                .filter(Unidad::estaVivo)
-                .forEach(Unidad::descansar);
-    }
+	@Override
+	public void recibirAtaque(int danio) {
+		if (!unidadesAliadas.isEmpty()) {
+			unidadesAliadas.peek().recibirAtaque(danio);
+			if (!unidadesAliadas.peek().estaVivo())
+				unidadesAliadas.poll();
+		} else if (!unidadesPropias.isEmpty()) {
+			unidadesPropias.peek().recibirAtaque(danio);
+			if (!unidadesPropias.peek().estaVivo())
+				unidadesPropias.poll();
+		} else {
+			ultimaHerida.recibirAtaque(danio);
+		}
+	}
 
-    @Override
-    public void recibirAtaque(int danio) {
-        // El ejército distribuye el daño entre todas las unidades vivas
-        int unidadesVivas = (int) unidades.stream().filter(Unidad::estaVivo).count();
-        if (unidadesVivas > 0) {
-            int danioPorUnidad = danio / unidadesVivas;
-            unidades.stream()
-                    .filter(Unidad::estaVivo)
-                    .forEach(unidad -> unidad.recibirAtaque(danioPorUnidad));
-        }
-    }
+	public void actualizarUltimoHerido(){
+		Unidad ultimoEnRecibirDanio;
+		if (!unidadesAliadas.isEmpty()) {
+			ultimoEnRecibirDanio = unidadesAliadas.peek();
+		} else if (!unidadesPropias.isEmpty()) {
+			ultimoEnRecibirDanio = unidadesPropias.peek();
+		} else {
+			ultimoEnRecibirDanio = ultimaHerida;
+		}
 
-    public List<Unidad> getUnidades() {
-        return unidades;
-    }
+		// reincorporo al ejercito
+		if(ultimaHerida.bando == Bando.PROPIO){
+			unidadesPropias.add(ultimaHerida);
+		}else if(ultimaHerida.bando == Bando.ALIADO){
+			unidadesAliadas.add(ultimaHerida);
+		}
+		ultimaHerida = ultimoEnRecibirDanio;
+	}
 
-    public double getPorcentajeVidaTotal() {
-        if (unidades.isEmpty()) return 0.0;
-
-        double vidaActual = unidades.stream()
-                .mapToDouble(Unidad::getSalud)
-                .sum();
-
-        double vidaMaxima = unidades.stream()
-                .mapToDouble(Unidad::getSaludMaxima)
-                .sum();
-
-        return (vidaActual / vidaMaxima) * 100;
-    }
-
-    public List<Unidad> getUnidadesVivas() {
-        return unidades.stream()
-                .filter(Unidad::estaVivo)
-                .toList();
-    }
+	public int contarUnidadesFinales() {
+		return unidadesAliadas.size() + unidadesPropias.size() + (ultimaHerida != null && ultimaHerida.estaVivo() ? 1 : 0);
+	}
 }

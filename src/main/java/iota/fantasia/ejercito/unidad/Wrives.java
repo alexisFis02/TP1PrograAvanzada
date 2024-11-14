@@ -1,5 +1,7 @@
 package iota.fantasia.ejercito.unidad;
 
+import iota.fantasia.ejercito.Atacable;
+
 /*
  * Un Wrives tiene una salud inicial de 108. Utiliza magia, y su rango de ataque es de 14 a 28 metros.
  * Ocasiona un daño básico de 113 puntos. Cuando ataca, lo hace con 2 veces su daño, cada 2 ataques.
@@ -17,7 +19,7 @@ public class Wrives extends Unidad {
     }
 
     @Override
-    public void atacar(Unidad enemigo) {
+    public void atacar(Atacable enemigo) {
         if (!estaVivo() || !enemigo.estaVivo() || !haSidoAtacado) {
             return;
         }
