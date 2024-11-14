@@ -18,13 +18,9 @@ public class Reralopes extends Unidad {
 
     @Override
     public void atacar(Atacable enemigo) {
-        if (!estaVivo() || !enemigo.estaVivo()) {
-            return;
-        }
-
         contadorAtaques++;
         // Erra 2 de cada 4 ataques
-        if (contadorAtaques % 4 == 2 || contadorAtaques % 4 == 3) {
+        if (contadorAtaques % 2 == 0) {
             return;
         }
 

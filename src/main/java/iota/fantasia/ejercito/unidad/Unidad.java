@@ -10,6 +10,10 @@ public abstract class Unidad extends Atacable implements Comparable<Unidad> {
     protected int rangoAtaqueMin;
     protected int rangoAtaqueMax;
 
+    public Unidad(){
+    	
+    }
+    
     public Unidad(int salud, int saludMaxima, int danioBase, int rangoAtaqueMin, int rangoAtaqueMax) {
         this.salud = salud;
         this.saludMaxima = saludMaxima;

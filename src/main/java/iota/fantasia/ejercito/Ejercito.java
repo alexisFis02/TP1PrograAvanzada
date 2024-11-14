@@ -2,102 +2,132 @@ package iota.fantasia.ejercito;
 
 import iota.fantasia.ejercito.enums.Raza;
 import iota.fantasia.ejercito.factory.UnidadFactory;
+import iota.fantasia.ejercito.unidad.Nortaichan;
+import iota.fantasia.ejercito.unidad.Radaiteran;
+import iota.fantasia.ejercito.unidad.Reralopes;
 import iota.fantasia.ejercito.unidad.Unidad;
+import iota.fantasia.ejercito.unidad.Wrives;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.PriorityQueue;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.ArrayList;
 
 public class Ejercito extends Atacable {
 
-	//reemplazar todos por colas
-	private final ArrayList<Unidad> unidades;
-	//private final ArrayList<Unidad> unidades_aliadas;
-	//private final Unidad ultima_herida;
+	private final Queue<Unidad> unidadesPropias;
+	private final Queue<Unidad> unidadesAliadas;
+	private Unidad ultimaHerida;
 
 	public Ejercito(ArrayList<Unidad> unidades) {
 		if (unidades.isEmpty()) {
 			throw new IllegalArgumentException("No se puede crear un ejercito sin unidades.");
 		}
-		this.unidades = new ArrayList<>(unidades);
+		this.unidadesPropias = new LinkedList<>(unidades);
+		this.unidadesAliadas = new LinkedList<>();
+		this.ultimaHerida = null;
 	}
 
-	public Ejercito(int cantidad, Raza raza) {
-		this.unidades = new ArrayList<>();
-		agregarUnidades(cantidad, raza);
+	public Ejercito(int cantidad, Raza raza, Bando bando) {
+		this.unidadesPropias = new LinkedList<>();
+		this.unidadesAliadas = new LinkedList<>();
+		this.ultimaHerida = null;
+		agregarUnidades(cantidad, raza, bando);
 	}
 
 	public void agregarUnidad(Unidad unidad) {
-		unidades.add(unidad);
+		unidadesPropias.add(unidad);
 	}
 
-	public void agregarUnidades(int cantidad, Raza raza) {
+	public void agregarUnidadesPropias(int cantidad, Raza raza) {
 		for (int i = 0; i < cantidad; i++) {
-			unidades.add(UnidadFactory.crearUnidad(raza));
+			unidadesPropias.add(UnidadFactory.crearUnidad(raza));
 		}
-		//deberia ser al unidades_aliados pero fallaria al crearlo la primera vez RESOLVER
 	}
 
-	public void atacar(Atacable enemigo) {
-		Unidad atacante = unidades.stream().filter(Unidad::estaVivo).findFirst().orElse(null);
-		atacante.atacar(enemigo);
+	public void agregarUnidadesAliadas(int cantidad, Raza raza) {
+		for (int i = 0; i < cantidad; i++) {
+			unidadesAliadas.add(UnidadFactory.crearUnidad(raza));
+		}
+	}
 
+	public void agregarUnidades(int cantidad, Raza raza, Bando bando) {
+		switch (bando) {
+		case PROPIO -> agregarUnidadesPropias(cantidad, raza);
+		case ALIADO -> agregarUnidadesAliadas(cantidad, raza);
+		case ENEMIGO -> agregarUnidadesPropias(cantidad, raza);
+		}
+	}
+
+	@Override
+	public void atacar(Atacable enemigo) {
+		if (!unidadesAliadas.isEmpty()) {
+			unidadesAliadas.peek().atacar(enemigo);
+		} else if (!unidadesPropias.isEmpty()) {
+			unidadesPropias.peek().atacar(enemigo);
+		} else {
+			ultimaHerida.atacar(enemigo);
+		}
 	}
 
 	public boolean estaVivo() {
-		return !unidades.isEmpty() && unidades.stream().anyMatch(Unidad::estaVivo);
+		return (!unidadesPropias.isEmpty() || !unidadesAliadas.isEmpty())
+				|| (ultimaHerida != null && ultimaHerida.estaVivo());
 	}
 
 	public void descansar() {
-		//unidades.stream().filter(Unidad::estaVivo).forEach(Unidad::descansar);
-		unidades.stream().forEach(Unidad::descansar);
-		//deben descansar ambos ejercitos
-		//unidades_aliadas.stream().forEach(Unidad::descansar);
-		//ultima_herida.descansar;
+		int hashPrimero;
+		if (!unidadesPropias.isEmpty()) {
+			hashPrimero = unidadesPropias.peek().hashCode();
+			unidadesPropias.peek().descansar();
+			unidadesPropias.add(unidadesPropias.poll());
+			while (hashPrimero != unidadesPropias.peek().hashCode()) {
+				unidadesPropias.peek().descansar();
+				unidadesPropias.add(unidadesPropias.poll());
+			}
+		}
+		if (!unidadesAliadas.isEmpty()) {
+			hashPrimero = unidadesAliadas.peek().hashCode();
+			unidadesAliadas.peek().descansar();
+			unidadesAliadas.add(unidadesAliadas.poll());
+			while (hashPrimero != unidadesAliadas.peek().hashCode()) {
+				unidadesAliadas.peek().descansar();
+				unidadesAliadas.add(unidadesAliadas.poll());
+			}
+		}
+		ultimaHerida.descansar();
 	}
 
 	@Override
 	public void recibirAtaque(int danio) {
-//		// El ejército distribuye el daño entre todas las unidades vivas
-//		int unidadesVivas = (int) unidades.stream().filter(Unidad::estaVivo).count();
-//		if (unidadesVivas > 0) {
-//			int danioPorUnidad = danio / unidadesVivas;
-//			unidades.stream().filter(Unidad::estaVivo).forEach(unidad -> unidad.recibirAtaque(danioPorUnidad));
-//		}
-		
-		
-		
-		//el ejercito no sabe recibir ataques
+		if (!unidadesAliadas.isEmpty()) {
+			unidadesAliadas.peek().recibirAtaque(danio);
+			if (!unidadesAliadas.peek().estaVivo())
+				unidadesAliadas.poll();
+		} else if (!unidadesPropias.isEmpty()) {
+			unidadesPropias.peek().recibirAtaque(danio);
+			if (!unidadesPropias.peek().estaVivo())
+				unidadesPropias.poll();
+		} else {
+			ultimaHerida.recibirAtaque(danio);
+		}
 	}
 
-	public List<Unidad> getUnidades() {
-		return unidades;
+	public int contarUnidadesFinales() {
+		int contador = 0;
+		while(!unidadesAliadas.isEmpty()) {
+			unidadesAliadas.poll();
+			contador++;
+		}
+		while(!unidadesPropias.isEmpty()) {
+			unidadesPropias.poll();
+			contador ++;
+		}
+		if(ultimaHerida != null && ultimaHerida.estaVivo()) {
+			contador++;
+		}
+		return contador;
 	}
-
-	public double getPorcentajeVidaTotal() {
-		if (unidades.isEmpty())
-			return 0.0;
-
-		double vidaActual = unidades.stream().mapToDouble(Unidad::getSalud).sum();
-
-		double vidaMaxima = unidades.stream().mapToDouble(Unidad::getSaludMaxima).sum();
-
-		return (vidaActual / vidaMaxima) * 100;
-	}
-
-	public List<Unidad> getUnidadesVivas() {
-		return unidades.stream().filter(Unidad::estaVivo).toList();
-	}
-
 }
-
-/*
- * ejercito ejercito aliado[u1,u2,u3];ejercito
- * propio[u4,u5,u6];[u1,u2,u3,u4,u5,u6,u7,u8,u9]
- * 
- * ataco,ordeno[u1,u2,u3,u7,u8,u9,u4,u5,u6]
- * 
- * ejercito aliado[u7,u8,u9]
- */

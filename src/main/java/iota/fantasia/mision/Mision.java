@@ -39,7 +39,7 @@ public class Mision {
 	@Override
 	public String toString() {
 		StringBuilder pueblosInfo = new StringBuilder("Informacion de todos los pueblos:\n");
-
+		
 		pueblosInfo.append(" - Pueblo ").append(inicio).append(" (ORIGEN): ")
 				.append(mapa.obtenerPoblado(inicio).getHabitantes()).append(" habitantes, Raza: ")
 				.append(mapa.obtenerPoblado(inicio).getRaza()).append(", Bando: ")

@@ -19,7 +19,7 @@ public class Nortaichan extends Unidad {
 
     
     public void atacar(Atacable enemigo) {
-        if (!estaVivo() || !enemigo.estaVivo() || dePiedra) {
+        if (dePiedra) {
             return;
         }
 
