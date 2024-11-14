@@ -19,8 +19,8 @@ public class Radaiteran extends Unidad {
             return;
         }
 
-        contadorAtaques++;
         int danioTotal = danioBase + (3 * contadorAtaques);
+        contadorAtaques++;
         enemigo.recibirAtaque(danioTotal);
     }
 

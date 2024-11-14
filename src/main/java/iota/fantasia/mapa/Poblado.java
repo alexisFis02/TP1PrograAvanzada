@@ -83,4 +83,16 @@ public class Poblado {
 	public String toString() {
 		return super.toString();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		Poblado poblado = (Poblado) obj;
+		return id == poblado.id && habitantes == poblado.habitantes && raza == poblado.raza && bando == poblado.bando;
+	}
 }

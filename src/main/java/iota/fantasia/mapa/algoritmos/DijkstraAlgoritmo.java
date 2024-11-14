@@ -8,6 +8,13 @@ import java.util.*;
 
 public class DijkstraAlgoritmo {
     public static ResultadoCamino encontrarCaminoMasRapido(Mapa mapa, Poblado origen, Poblado destino) {
+        if (mapa == null || origen == null || destino == null) {
+            throw new IllegalArgumentException("Los argumentos no pueden ser nulos");
+        }
+        if (!mapa.getPoblados().containsKey(origen.getId()) || !mapa.getPoblados().containsKey(destino.getId())) {
+            throw new IllegalArgumentException("Los poblados no existen en el mapa");
+        }
+
         Map<Poblado, Integer> tiempos = new HashMap<>();
         Map<Integer, Integer> previos = new HashMap<>();
         Set<Poblado> visitados = new HashSet<>();

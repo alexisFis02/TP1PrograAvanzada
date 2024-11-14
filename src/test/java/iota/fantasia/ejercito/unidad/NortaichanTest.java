@@ -18,8 +18,8 @@ class NortaichanTest {
     @Test
     void testDescansar() {
         Nortaichan nortaichan = new Nortaichan();
-        nortaichan.descansar();
         nortaichan.recibirAtaque(nortaichan.getSalud()-1);
+        nortaichan.descansar();
         assertEquals(nortaichan.getSaludMaxima(), nortaichan.getSalud()); // Recupera toda su salud
         assertTrue(nortaichan.isDePiedra()); // Debería estar de piedra
     }

@@ -2,7 +2,7 @@ package iota.fantasia.ejercito.unidad;
 
 import iota.fantasia.ejercito.Atacable;
 
-public abstract class Unidad extends Atacable implements Comparable<Unidad> {
+public abstract class Unidad extends Atacable {
 
     protected int salud;
     protected int saludMaxima;
@@ -10,10 +10,6 @@ public abstract class Unidad extends Atacable implements Comparable<Unidad> {
     protected int rangoAtaqueMin;
     protected int rangoAtaqueMax;
 
-    public Unidad(){
-    	
-    }
-    
     public Unidad(int salud, int saludMaxima, int danioBase, int rangoAtaqueMin, int rangoAtaqueMax) {
         this.salud = salud;
         this.saludMaxima = saludMaxima;
@@ -58,40 +54,5 @@ public abstract class Unidad extends Atacable implements Comparable<Unidad> {
      */
     public int getDanioBase() {
         return danioBase;
-    }
-
-    /**
-     * Obtiene el rango mínimo de ataque de la unidad
-     *
-     * @return rango mínimo de ataque
-     */
-    public int getRangoAtaqueMin() {
-        return rangoAtaqueMin;
-    }
-
-    /**
-     * Obtiene el rango máximo de ataque de la unidad
-     *
-     * @return rango máximo de ataque
-     */
-    public int getRangoAtaqueMax() {
-        return rangoAtaqueMax;
-    }
-
-    /**
-     * Compara esta unidad con otra basándose en su salud actual
-     *
-     * @param otraUnidad unidad a comparar
-     * @return un valor negativo si esta unidad tiene menos salud,
-     * cero si tienen la misma salud,
-     * un valor positivo si esta unidad tiene más salud
-     */
-    @Override
-    public int compareTo(Unidad otraUnidad) {
-        return Integer.compare(this.salud, otraUnidad.salud);
-    }
-
-    public String getTipoUnidad() {
-        return this.getClass().getSimpleName();
     }
 }

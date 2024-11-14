@@ -126,11 +126,14 @@ public class Ejercito extends Atacable {
 		}
 
 		// reincorporo al ejercito
-		if(ultimaHerida.bando == Bando.PROPIO){
-			unidadesPropias.add(ultimaHerida);
-		}else if(ultimaHerida.bando == Bando.ALIADO){
-			unidadesAliadas.add(ultimaHerida);
+		if(ultimaHerida != null && ultimaHerida.estaVivo()){
+			if(ultimaHerida.bando == Bando.PROPIO){
+				unidadesPropias.add(ultimaHerida);
+			}else if(ultimaHerida.bando == Bando.ALIADO){
+				unidadesAliadas.add(ultimaHerida);
+			}
 		}
+
 		ultimaHerida = ultimoEnRecibirDanio;
 	}
 
