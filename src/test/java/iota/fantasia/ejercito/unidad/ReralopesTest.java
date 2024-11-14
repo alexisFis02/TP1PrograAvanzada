@@ -3,8 +3,6 @@ package iota.fantasia.ejercito.unidad;
 import iota.fantasia.ejercito.Atacable;
 import org.junit.jupiter.api.Test;
 
-import java.util.prefs.PreferenceChangeListener;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReralopesTest {
@@ -13,7 +11,7 @@ class ReralopesTest {
     void testAtacar() {
         Reralopes reralopes = new Reralopes();
         Atacable enemigo = new UnidadMock(100);
-        
+
         reralopes.atacar(enemigo);
         assertEquals(73, enemigo.getSalud()); // 100 - 27 = 73
     }
@@ -56,12 +54,12 @@ class ReralopesTest {
         int vidaEsperada = 500;
         reralopes.descansar(); // Se concentra
         reralopes.atacar(enemigo); // 1er ataque (daño potenciado)
-        vidaEsperada -= reralopes.getDanioBase()*2;
+        vidaEsperada -= reralopes.getDanioBase() * 2;
         assertEquals(vidaEsperada, enemigo.getSalud()); // 100 - 27 = 73
 
         reralopes.atacar(enemigo); // 2do ataque (errar)
         reralopes.atacar(enemigo); // 3er ataque (daño potenciado)
-        vidaEsperada -= reralopes.getDanioBase()*2;
+        vidaEsperada -= reralopes.getDanioBase() * 2;
         assertEquals(vidaEsperada, enemigo.getSalud()); // 73 - 54 = 19 (27 * 2)
 
         reralopes.atacar(enemigo); // 4to ataque (errar)
@@ -102,7 +100,7 @@ class ReralopesTest {
     }
 
     @Test
-    void testDescansarYDescansar(){
+    void testDescansarYDescansar() {
         Reralopes reralopes = new Reralopes();
         reralopes.descansar();
         reralopes.descansar();

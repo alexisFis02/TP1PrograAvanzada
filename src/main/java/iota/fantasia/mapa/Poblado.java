@@ -11,84 +11,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Poblado {
-	private final int id;
-	private final int habitantes;
-	private final Raza raza;
-	private final Bando bando;
-	// private Ejercito ejercito;
-	private final List<Camino> caminos;
+    private final int id;
+    private final int habitantes;
+    private final Raza raza;
+    private final Bando bando;
+    // private Ejercito ejercito;
+    private final List<Camino> caminos;
 
-	public Poblado(int id) {
-		this.id = id;
-		this.habitantes = 0;
-		this.raza = null;
-		this.bando = null;
-		this.caminos = new ArrayList<>();
-	}
-
-	public Poblado(int id, int habitantes, Raza raza, Bando bando) {
-		this.id = id;
-		this.habitantes = habitantes;
-		this.raza = raza;
-		this.bando = bando;
-		this.caminos = new ArrayList<>();
-	}
-
-    public Ejercito generarEjecitoConBando(Bando bando) {
-		var unidades = new ArrayList<Unidad>();
-		for (int i = 0; i < habitantes; i++) {
-			unidades.add(UnidadFactory.crearUnidadConBando(raza, bando));
-		}
-		return new Ejercito(unidades);
+    public Poblado(int id) {
+        this.id = id;
+        this.habitantes = 0;
+        this.raza = Raza.DESCONOCIDA;
+        this.bando = null;
+        this.caminos = new ArrayList<>();
     }
 
-	// Getters
-	public int getId() {
-		return id;
-	}
+    public Poblado(int id, int habitantes, Raza raza, Bando bando) {
+        this.id = id;
+        this.habitantes = habitantes;
+        this.raza = raza;
+        this.bando = bando;
+        this.caminos = new ArrayList<>();
+    }
 
-	public int getHabitantes() {
-		return habitantes;
-	}
+    public Ejercito generarEjecitoConBando(Bando bando) {
+        var unidades = new ArrayList<Unidad>();
+        for (int i = 0; i < habitantes; i++) {
+            unidades.add(UnidadFactory.crearUnidadConBando(raza, bando));
+        }
+        return new Ejercito(unidades);
+    }
 
-	public Raza getRaza() {
-		return raza;
-	}
+    // Getters
+    public int getId() {
+        return id;
+    }
 
-	public Bando getBando() {
-		return bando;
-	}
+    public int getHabitantes() {
+        return habitantes;
+    }
 
-	@Override
-	public int hashCode() {
-		return Integer.hashCode(id);
-	}
+    public Raza getRaza() {
+        return raza;
+    }
 
-	public void agregarCamino(int destino, int distanciaEnTiempo) {
-		if (destino == this.id) {
-			return;
-		}
-		caminos.add(new Camino(this.id, destino, distanciaEnTiempo + 10));
-	}
+    public Bando getBando() {
+        return bando;
+    }
 
-	public List<Camino> getCaminos() {
-		return caminos;
-	}
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
 
-	@Override
-	public String toString() {
-		return super.toString();
-	}
+    public void agregarCamino(int destino, int distanciaEnTiempo) {
+        if (destino == this.id) {
+            return;
+        }
+        caminos.add(new Camino(this.id, destino, distanciaEnTiempo + 10));
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null || getClass() != obj.getClass()) {
-			return false;
-		}
-		Poblado poblado = (Poblado) obj;
-		return id == poblado.id && habitantes == poblado.habitantes && raza == poblado.raza && bando == poblado.bando;
-	}
+    public List<Camino> getCaminos() {
+        return caminos;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Poblado poblado = (Poblado) obj;
+        return id == poblado.id && habitantes == poblado.habitantes && raza == poblado.raza && bando == poblado.bando;
+    }
 }

@@ -1,8 +1,6 @@
 package iota.fantasia.batalla;
 
-import iota.fantasia.ejercito.Atacable;
 import iota.fantasia.ejercito.Ejercito;
-import iota.fantasia.mision.calculador.CalculadorMision;
 
 public class Batalla {
     private final Ejercito ejercitoAliado;
@@ -14,24 +12,23 @@ public class Batalla {
     }
 
     public boolean simularBatalla() {
-    	boolean batallaEnCurso = true;
-    	boolean resultado = false;
-    
-		while (batallaEnCurso) {
-			ejercitoAliado.atacar(ejercitoEnemigo);
-			if (!ejercitoEnemigo.estaVivo()) {
-				batallaEnCurso = false;
-				resultado = true;
-				continue;
-			}
-			
-			ejercitoEnemigo.atacar(ejercitoAliado);
-			if (!ejercitoAliado.estaVivo()) {
-				
-				batallaEnCurso = false;
-				resultado = false;
-			}
-		}
-		return resultado;
+
+        boolean batallaEnCurso = true;
+        boolean resultado = false;
+
+        while (batallaEnCurso) {
+            ejercitoAliado.atacar(ejercitoEnemigo);
+            if (!ejercitoEnemigo.estaVivo()) {
+                batallaEnCurso = false;
+                resultado = true;
+                continue;
+            }
+
+            ejercitoEnemigo.atacar(ejercitoAliado);
+            if (!ejercitoAliado.estaVivo()) {
+                batallaEnCurso = false;
+            }
+        }
+        return resultado;
     }
 }

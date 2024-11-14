@@ -35,9 +35,6 @@ public class Mapa {
         return instance;
     }
 
-    public static void reset() {
-        instance = null;
-    }
 
     private void armarMapaPoblados(Set<Poblado> poblados, List<Camino> caminos) {
         // agregar los poblados
@@ -60,17 +57,8 @@ public class Mapa {
         return poblados.get(id);
     }
 
-    public int obtenerDistancia(int origen, int destino) {
-        Poblado pobladoOrigen = poblados.get(origen);
-        return pobladoOrigen.getCaminos().stream()
-                .filter(camino -> camino.destino() == destino)
-                .findFirst()
-                .map(Camino::distanciaEnTiempo)
-                .orElse(Integer.MAX_VALUE);
+    @Override
+    public String toString() {
+        return "Mapa [poblados=" + poblados + "]";
     }
-
-	@Override
-	public String toString() {
-		return "Mapa [poblados=" + poblados + "]";
-	}
 }

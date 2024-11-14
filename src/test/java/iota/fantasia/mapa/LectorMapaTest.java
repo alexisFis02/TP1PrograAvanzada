@@ -21,7 +21,7 @@ class LectorMapaTest {
     Path tempDir;
 
     @Test
-    public void leerArchivoValido() throws IOException {
+    public void testLeerArchivoValido() throws IOException {
         // archivo de prueba valido
         String contenido = """
                 3
@@ -43,28 +43,28 @@ class LectorMapaTest {
                 () -> assertEquals(3, datos.destino(), "El destino del archivo no es correcto"),
                 () -> assertEquals(3, datos.poblados().size(), "Número de poblados incorrecto"),
                 () -> assertEquals(Set.of(
-                            new Poblado(1, 100, Raza.WRIVES, Bando.ALIADO),
-                            new Poblado(2, 200, Raza.RERALOPES, Bando.ENEMIGO),
-                            new Poblado(3, 300, Raza.RADAITERAN, Bando.PROPIO)
-                    ), datos.poblados(), "Poblados incorrectos"),
+                        new Poblado(1, 100, Raza.WRIVES, Bando.ALIADO),
+                        new Poblado(2, 200, Raza.RERALOPES, Bando.ENEMIGO),
+                        new Poblado(3, 300, Raza.RADAITERAN, Bando.PROPIO)
+                ), datos.poblados(), "Poblados incorrectos"),
                 () -> assertEquals(3, datos.caminos().size(), "Número de caminos incorrecto"),
                 () -> assertEquals(List.of(
-                            new Camino(1, 2, 10),
-                            new Camino(2, 3, 20),
-                            new Camino(1, 3, 15)
-                    ), datos.caminos(), "Caminos incorrectos")
+                        new Camino(1, 2, 10),
+                        new Camino(2, 3, 20),
+                        new Camino(1, 3, 15)
+                ), datos.caminos(), "Caminos incorrectos")
         );
     }
 
     @Test
-    void archivoNoExiste() {
+    void testArchivoNoExiste() {
         assertThrows(IOException.class, () ->
                 LectorMapa.leerArchivo("archivo_inexistente.txt")
         );
     }
 
     @Test
-    void archivoVacio() throws IOException {
+    void testArchivoVacio() throws IOException {
         Path archivo = crearArchivoTemporal("");
         assertThrows(IOException.class, () ->
                 LectorMapa.leerArchivo(archivo.toString())
@@ -72,7 +72,7 @@ class LectorMapaTest {
     }
 
     @Test
-    void cantidadPobladosInvalida() throws IOException {
+    void testCantidadPobladosInvalida() throws IOException {
         String contenido = """
                 -1
                 1 100 Wrives aliado
@@ -85,7 +85,7 @@ class LectorMapaTest {
     }
 
     @Test
-    void formatoPobladoInvalido() throws IOException {
+    void testFormatoPobladoInvalido() throws IOException {
         String contenido = """
                 1
                 1 100 RazaInvalida aliado
@@ -99,7 +99,7 @@ class LectorMapaTest {
     }
 
     @Test
-    void formatoRutaInvalido() throws IOException {
+    void testFormatoRutaInvalido() throws IOException {
         String contenido = """
                 1
                 1 100 Wrives aliado
@@ -113,7 +113,7 @@ class LectorMapaTest {
     }
 
     @Test
-    void formatoCaminoInvalido() throws IOException {
+    void testFormatoCaminoInvalido() throws IOException {
         String contenido = """
                 1
                 1 100 Wrives aliado

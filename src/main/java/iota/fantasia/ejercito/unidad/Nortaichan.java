@@ -1,4 +1,5 @@
 package iota.fantasia.ejercito.unidad;
+
 import iota.fantasia.ejercito.Atacable;
 import iota.fantasia.ejercito.enums.Bando;
 
@@ -16,13 +17,13 @@ public class Nortaichan extends Unidad {
     private int turnosPiedra = 0;
 
     public Nortaichan() {
-        super(66, 66, 18, 16, 22,null);
+        super(66, 66, 18, 16, 22, null);
     }
 
     public Nortaichan(Bando bando) {
         super(66, 66, 18, 16, 22, bando);
     }
-    
+
     public void atacar(Atacable enemigo) {
         if (dePiedra) {
             turnosPiedra--;
@@ -35,9 +36,9 @@ public class Nortaichan extends Unidad {
     }
 
     private int getDanioAlAtacar() {
-        int danio= danioBase;
+        int danio = danioBase;
         if (enfurecido) {
-            danio*= 2;
+            danio *= 2;
             turnosEnfurecido--;
             if (turnosEnfurecido <= 0) {
                 enfurecido = false;
@@ -46,9 +47,9 @@ public class Nortaichan extends Unidad {
         return danio;
     }
 
+    // TODO: esto esta bien?
     private void recuperarSalud() {
         int curacion = (int) (saludMaxima * 0.04);
-        int saludAntes = salud;
         salud = Math.min(saludMaxima, salud + curacion);
     }
 
@@ -63,8 +64,8 @@ public class Nortaichan extends Unidad {
     }
 
     /*
-    * Se asume que no se puede enfurecer cuando esta de piedra
-    * */
+     * Se asume que no se puede enfurecer cuando esta de piedra
+     * */
     @Override
     public void recibirAtaque(int danio) {
         int danioFinal = dePiedra ? danio / 2 : danio;

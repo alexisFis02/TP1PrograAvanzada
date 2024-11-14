@@ -4,121 +4,127 @@ import iota.fantasia.ejercito.enums.Bando;
 import iota.fantasia.ejercito.enums.Raza;
 import iota.fantasia.ejercito.unidad.Unidad;
 import iota.fantasia.ejercito.unidad.UnidadMock;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class EjercitoTest {
     
     private Ejercito ejercito;
-    private static final int SALUD_BASE = 100;
     
     @BeforeEach
     void setUp() {
-        var unidades = new ArrayList<Unidad>();
-        unidades.add(new UnidadMock(SALUD_BASE));
+        ArrayList<Unidad> unidades = new ArrayList<Unidad>();
+        unidades.add(new UnidadMock(100, Bando.PROPIO));
         ejercito = new Ejercito(unidades);
     }
 
     @Test
-    void crearEjercitoSinUnidadesDeberiaLanzarExcepcion() {
+    void constructor_ConListaVacia_LanzaExcepcion() {
         var unidadesVacias = new ArrayList<Unidad>();
         assertThrows(IllegalArgumentException.class, () -> new Ejercito(unidadesVacias));
     }
 
     @Test
-    void crearEjercitoConParametrosDeberiaCrearUnidadesCorrectas() {
-        var nuevoEjercito = new Ejercito(3, Raza.WRIVES, Bando.PROPIO);
-        assertEquals(3, nuevoEjercito.contarUnidadesFinales());
+    void constructor_ConCantidadRazaYBando_CreaEjercitoCorrectamente() {
+        var ejercito = new Ejercito(3, Raza.WRIVES, Bando.PROPIO);
+        assertEquals(3, ejercito.contarUnidadesFinales());
     }
 
     @Test
-    void agregarUnidadesPropiasDeberiaIncrementarElEjercito() {
-        int cantidadInicial = ejercito.contarUnidadesFinales();
-        ejercito.agregarUnidadesPropias(2, Raza.RERALOPES);
-        assertEquals(cantidadInicial + 2, ejercito.contarUnidadesFinales());
+    void agregarUnidades_UnidadesPropias_AumentaTamanioEjercito() {
+        ejercito.agregarUnidadesPropias(2, Raza.RADAITERAN);
+        assertEquals(3, ejercito.contarUnidadesFinales());
     }
 
     @Test
-    void agregarUnidadesAliadasDeberiaIncrementarElEjercito() {
-        int cantidadInicial = ejercito.contarUnidadesFinales();
-        ejercito.agregarUnidadesAliadas(2, Raza.NORTAICHIAN);
-        assertEquals(cantidadInicial + 2, ejercito.contarUnidadesFinales());
+    void agregarUnidades_UnidadesAliadas_AumentaTamanioEjercito() {
+        ejercito.agregarUnidadesAliadas(2, Raza.RERALOPES);
+        assertEquals(3, ejercito.contarUnidadesFinales());
     }
 
     @Test
-    void ejercitoDeberiaEstarVivoConUnidades() {
+    void estaVivo_EjercitoConUnidades_RetornaTrue() {
         assertTrue(ejercito.estaVivo());
     }
 
     @Test
-    void recibirAtaqueDeberiaReducirVidaDeUnidad() {
-        int danio = SALUD_BASE / 2;
-        ejercito.recibirAtaque(danio);
-        assertTrue(ejercito.estaVivo());
-        ejercito.recibirAtaque(danio + 1);
-        assertEquals(0, ejercito.contarUnidadesFinales());
+    void estaVivo_EjercitoSinUnidades_RetornaFalse() {
+        ejercito.recibirAtaque(1000); // Daño suficiente para matar todas las unidades
+        assertFalse(ejercito.estaVivo());
     }
 
     @Test
-    void ejercitoDeberiaPoderDescansar() {
-        int danioInicial = SALUD_BASE / 2;
-        ejercito.recibirAtaque(danioInicial);
-        ejercito.descansar();
+    void recibirAtaque_DanioMenorAVida_UnidadSobrevive() {
+        ejercito.recibirAtaque(50);
         assertTrue(ejercito.estaVivo());
-    }
-
-    @Test
-    void actualizarUltimoHeridoDeberiaFuncionarCorrectamente() {
-        ejercito.actualizarUltimoHerido();
         assertEquals(1, ejercito.contarUnidadesFinales());
     }
 
     @Test
-    void ejercitoDeberiaPoderAtacar() {
-        var unidadesEnemigas = new ArrayList<Unidad>();
-        unidadesEnemigas.add(new UnidadMock(SALUD_BASE));
-        Ejercito ejercitoEnemigo = new Ejercito(unidadesEnemigas);
+    void recibirAtaque_DanioMayorAVida_UnidadMuere() {
+        ejercito.recibirAtaque(150);
+        assertFalse(ejercito.estaVivo());
+        assertEquals(0, ejercito.contarUnidadesFinales());
+    }
+
+    @Test
+    void atacar_EjercitoAtacaAOtroEjercito_CausaDanio() {
+        var ejercitoEnemigo = new Ejercito(1, Raza.WRIVES, Bando.ENEMIGO);
+        var unidadesInicialesEnemigo = ejercitoEnemigo.contarUnidadesFinales();
         
         ejercito.atacar(ejercitoEnemigo);
+
+        int saludEsperada = ejercitoEnemigo.getPrimeroEnDefender().getSalud() - ejercito.getPrimeroEnAtacar().getDanioBase();
+
+        assertEquals(ejercitoEnemigo.getPrimeroEnDefender().getSalud(), saludEsperada);
         assertTrue(ejercitoEnemigo.estaVivo());
+        assertEquals(unidadesInicialesEnemigo, ejercitoEnemigo.contarUnidadesFinales());
     }
 
     @Test
-    void ejercitoDeberiaGestionarCorrectamenteUnidadesAliadasYPropias() {
-        var unidadesIniciales = new ArrayList<Unidad>();
-        unidadesIniciales.add(new UnidadMock(SALUD_BASE));
-        Ejercito ejercitoMixto = new Ejercito(unidadesIniciales);
+    void descansar_UnidadesDescansanCorrectamente() {
+        ejercito.recibirAtaque(50);
+        ejercito.descansar();
         
-        ejercitoMixto.agregarUnidades(2, Raza.RERALOPES, Bando.ALIADO);
-        assertEquals(3, ejercitoMixto.contarUnidadesFinales());
+        var ejercitoComparacion = new Ejercito(1, Raza.NORTAICHIAN, Bando.PROPIO);
+        
+        var danio = 30;
+        ejercito.recibirAtaque(danio);
+        ejercitoComparacion.recibirAtaque(danio);
+        
+        assertTrue(ejercito.estaVivo());
+        assertTrue(ejercitoComparacion.estaVivo());
     }
 
     @Test
-    void ejercitoDeberiaQuedarMuertoSinUnidades() {
-        var unidadesIniciales = new ArrayList<Unidad>();
-        unidadesIniciales.add(new UnidadMock(SALUD_BASE));
-        Ejercito ejercitoPequenio = new Ejercito(unidadesIniciales);
-        
-        ejercitoPequenio.recibirAtaque(SALUD_BASE + 1);
-        assertFalse(ejercitoPequenio.estaVivo());
+    void actualizarUltimoHerido_ActualizaCorrectamente() {
+        Unidad unidad1 = new UnidadMock(100, Bando.PROPIO);
+        Unidad unidad2 = new UnidadMock(220, Bando.PROPIO);
+
+        var unidades = new ArrayList<Unidad>();
+        unidades.add(unidad1);
+        unidades.add(unidad2);
+
+        var ejercito = new Ejercito(unidades);
+
+        ejercito.recibirAtaque(20);
+        ejercito.actualizarUltimoHerido();
+
+        assertEquals(unidad1, ejercito.getUltimoHerido());
+        assertNotEquals(unidad2, ejercito.getUltimoHerido());
+        assertEquals(2, ejercito.contarUnidadesFinales());
     }
 
     @Test
-    void prioridadDeAtaqueDeberiaSerAliadosSobrePropias() {
-        var unidadesIniciales = new ArrayList<Unidad>();
-        unidadesIniciales.add(new UnidadMock(SALUD_BASE));
-        Ejercito ejercitoMixto = new Ejercito(unidadesIniciales);
-        ejercitoMixto.agregarUnidadesAliadas(1, Raza.RERALOPES);
+    void contarUnidadesFinales_RetornaCantidadCorrecta() {
+        ejercito.agregarUnidadesPropias(2, Raza.NORTAICHIAN);
+        ejercito.agregarUnidadesAliadas(3, Raza.WRIVES);
         
-        var unidadesEnemigas = new ArrayList<Unidad>();
-        unidadesEnemigas.add(new UnidadMock(SALUD_BASE));
-        Ejercito ejercitoEnemigo = new Ejercito(unidadesEnemigas);
-        
-        ejercitoMixto.atacar(ejercitoEnemigo);
-        assertEquals(2, ejercitoMixto.contarUnidadesFinales());
+        assertEquals(6, ejercito.contarUnidadesFinales()); // 6 por que ya tiene la unidad mock
     }
 } 

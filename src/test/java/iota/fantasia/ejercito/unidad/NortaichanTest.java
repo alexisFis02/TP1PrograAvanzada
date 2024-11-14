@@ -2,6 +2,7 @@ package iota.fantasia.ejercito.unidad;
 
 import iota.fantasia.ejercito.Atacable;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class NortaichanTest {
@@ -10,7 +11,7 @@ class NortaichanTest {
     void testAtacar() {
         Nortaichan nortaichan = new Nortaichan();
         Atacable enemigo = new UnidadMock(100);
-        
+
         nortaichan.atacar(enemigo);
         assertEquals(100 - 18, enemigo.getSalud()); // 18
     }
@@ -18,7 +19,7 @@ class NortaichanTest {
     @Test
     void testDescansar() {
         Nortaichan nortaichan = new Nortaichan();
-        nortaichan.recibirAtaque(nortaichan.getSalud()-1);
+        nortaichan.recibirAtaque(nortaichan.getSalud() - 1);
         nortaichan.descansar();
         assertEquals(nortaichan.getSaludMaxima(), nortaichan.getSalud()); // Recupera toda su salud
         assertTrue(nortaichan.isDePiedra()); // Debería estar de piedra
@@ -36,7 +37,6 @@ class NortaichanTest {
     @Test
     void testEnfurecerseAlRecibirAtaque() {
         Nortaichan nortaichan = new Nortaichan();
-        UnidadMock enemigo = new UnidadMock(100);
         nortaichan.recibirAtaque(20); // Recibe daño
         assertTrue(nortaichan.isEnfurecido()); // Debería estar enfurecido
         assertEquals(2, nortaichan.getTurnosEnfurecido()); // Debería durar 2 turnos
@@ -83,9 +83,8 @@ class NortaichanTest {
     void testRecibirAtaqueMientrasEsDePiedra() {
         Nortaichan nortaichan = new Nortaichan();
         nortaichan.descansar(); // Se vuelve de piedra
-        UnidadMock enemigo = new UnidadMock(100);
         nortaichan.recibirAtaque(20); // Recibe daño
-        assertEquals(66 - (20 / 2), nortaichan.getSalud()); // Debería recibir la mitad del daño
+        assertEquals(66 - (20 / 2), nortaichan.getSalud()); // Debera recibir la mitad del daño
     }
 
     @Test
@@ -96,20 +95,14 @@ class NortaichanTest {
         nortaichan.descansar(); // Se vuelve de piedra
         assertTrue(nortaichan.isDePiedra()); // Debería estar de piedra
         nortaichan.recibirAtaque(20);
-        vidaEsperada -= (int) (20 / 2); // recibe la mitad del daño
+        vidaEsperada -= 20 / 2; // recibe la mitad del daño
         assertEquals(vidaEsperada, nortaichan.getSalud());
 
         nortaichan.recibirAtaque(20);
-        vidaEsperada -= (int) (20 / 2); // recibe la mitad del daño
+        vidaEsperada -= 20 / 2; // recibe la mitad del daño
         assertEquals(vidaEsperada, nortaichan.getSalud());
         assertFalse(nortaichan.isDePiedra()); // Debería dejar de estar de piedra
 
-        /*
-        * u >> n se asume (u 10 veces mas grande que n)
-        * n2 < u * n
-        * u * n
-        * u <- complejidad final
-        * */
     }
 
     @Test
